@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scent Creation Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --brand-navy:   #183E72;
+      --brand-red:    #BD2B0B;
+      --gold:         #B8973A;
+      --gold-light:   #D4AF5A;
+      --white:        #FFFFFF;
+      --off-white:    #F8F6F2;
+      --soft-cream:   #F1EDE5;
+      --text-dark:    #1A1A1A;
+      --text-mid:     #4A4A4A;
+      --text-light:   #7A7A7A;
+      --border:       rgba(184,151,58,0.25);
+
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'Jost', system-ui, sans-serif;
+
+      --section-pad: clamp(72px, 10vw, 120px);
+      --container:   1200px;
+    }
+
+    /* ===================== RESET ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      color: var(--text-dark);
+      background: var(--off-white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===================== UTILITY ===================== */
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(20px, 5vw, 60px); }
+    .gold-line {
+      display: block; width: 48px; height: 1px;
+      background: var(--gold); margin-bottom: 20px;
+    }
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 clamp(20px, 5vw, 60px);
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(248,246,242,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(24,62,114,0.08); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--brand-navy);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--brand-navy); }
+    .nav-cta {
+      background: var(--brand-navy) !important;
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-size: 12px !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--brand-red) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--brand-navy); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--off-white);
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(24,62,114,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(184,151,58,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Decorative molecule rings */
+    .hero-deco {
+      position: absolute; right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: clamp(400px, 50vw, 700px);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 720px;
+    }
+    .hero-content .eyebrow { color: var(--gold); margin-bottom: 16px; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--brand-navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .hero h1 em { font-style: italic; color: var(--brand-navy); }
+    .hero-tagline {
+      font-size: clamp(15px, 1.6vw, 18px);
+      color: var(--text-mid);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--brand-red);
+      color: var(--white);
+      padding: 16px 40px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      border-radius: 2px;
+    }
+    .btn-primary:hover { background: var(--brand-navy); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--brand-navy);
+      padding: 15px 38px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--brand-navy);
+      cursor: pointer;
+      transition: all 0.25s;
+      border-radius: 2px;
+      margin-left: 16px;
+    }
+    .btn-outline:hover { background: var(--brand-navy); color: var(--white); }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block; width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ===================== ABOUT ===================== */
+    .about {
+      padding: var(--section-pad) 0;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 300;
+      color: var(--brand-navy);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .about-text h2 em { font-style: italic; }
+    .about-text p {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-image-box {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--soft-cream) 0%, #E8E0D5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(24,62,114,0.08) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(184,151,58,0.12) 0%, transparent 50%);
+    }
+    /* Decorative flask SVG inside the box */
+    .flask-icon { width: 120px; opacity: 0.15; }
+    .about-accent-box {
+      position: absolute;
+      bottom: -24px; left: -24px;
+      background: var(--brand-navy);
+      color: var(--white);
+      padding: 28px 32px;
+      width: 200px;
+    }
+    .about-accent-box .num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .about-accent-box .label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+
+    /* ===================== EXPERTISE ===================== */
+    .expertise {
+      padding: var(--section-pad) 0;
+      background: var(--off-white);
+    }
+    .section-header { text-align: center; margin-bottom: clamp(48px, 6vw, 72px); }
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      color: var(--brand-navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 15px;
+      color: var(--text-light);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .expertise-card {
+      background: var(--white);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--brand-red);
+      transition: height 0.4s ease;
+    }
+    .expertise-card:hover::before { height: 100%; }
+    .expertise-card:hover { transform: translateY(-4px); }
+    .card-icon {
+      width: 48px; height: 48px;
+      margin-bottom: 28px;
+      color: var(--brand-navy);
+    }
+    .expertise-card h3 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--brand-navy);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .expertise-card p {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.85;
+    }
+    .card-number {
+      position: absolute;
+      bottom: 24px; right: 32px;
+      font-family: var(--serif);
+      font-size: 60px;
+      font-weight: 300;
+      color: rgba(24,62,114,0.06);
+      line-height: 1;
+    }
+
+    /* ===================== PYRAMID ===================== */
+    .pyramid-section {
+      padding: var(--section-pad) 0;
+      background: var(--brand-navy);
+      position: relative;
+      overflow: hidden;
+    }
+    .pyramid-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,151,58,0.08) 0%, transparent 70%);
+    }
+    .pyramid-section .section-header h2 { color: var(--white); }
+    .pyramid-section .section-header p { color: rgba(255,255,255,0.5); }
+    .pyramid-section .eyebrow { color: var(--gold); }
+    .pyramid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* SVG Pyramid */
+    .pyramid-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .pyramid-svg-wrap { width: 100%; max-width: 380px; }
+
+    /* Notes list */
+    .notes-list { display: flex; flex-direction: column; gap: 32px; }
+    .note-item { display: flex; gap: 20px; align-items: flex-start; }
+    .note-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .note-dot.top    { background: var(--gold-light); }
+    .note-dot.heart  { background: var(--brand-red); }
+    .note-dot.base   { background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.5); }
+    .note-text h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .note-text p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+    .note-examples {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    }
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5);
+      border-radius: 2px;
+    }
+
+    /* ===================== PROCESS ===================== */
+    .process {
+      padding: var(--section-pad) 0;
+      background: var(--white);
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: clamp(40px, 6vw, 64px);
+      border: 1px solid var(--border);
+    }
+    .step {
+      padding: 44px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step-num {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .step-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .step h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--brand-navy);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .step p { font-size: 13px; color: var(--text-light); line-height: 1.85; }
+
+    /* ===================== TESTIMONIAL ===================== */
+    .testimonial {
+      padding: clamp(60px, 8vw, 100px) 0;
+      background: var(--soft-cream);
+      text-align: center;
+    }
+    .testimonial blockquote {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--brand-navy);
+      max-width: 800px;
+      margin: 0 auto 24px;
+      line-height: 1.5;
+    }
+    .testimonial cite {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      font-style: normal;
+    }
+    .testimonial cite strong { color: var(--gold); }
+
+    /* ===================== CONTACT ===================== */
+    .contact {
+      padding: var(--section-pad) 0;
+      background: var(--off-white);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contact-info h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 300;
+      color: var(--brand-navy);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .contact-info h2 em { font-style: italic; }
+    .contact-info p {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+    .contact-detail {
+      display: flex; gap: 16px; align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .contact-detail-icon {
+      width: 36px; height: 36px;
+      background: rgba(24,62,114,0.08);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+    .contact-detail-icon svg { width: 16px; height: 16px; color: var(--brand-navy); }
+    .contact-detail-text .label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+    .contact-detail-text a,
+    .contact-detail-text span {
+      font-size: 14px;
+      color: var(--text-dark);
+      transition: color 0.2s;
+    }
+    .contact-detail-text a:hover { color: var(--brand-red); }
+
+    /* Contact form */
+    .contact-form { background: var(--white); padding: 40px; border: 1px solid var(--border); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #E0D9CE;
+      background: var(--off-white);
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 2px;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--brand-navy); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-submit {
+      width: 100%;
+      background: var(--brand-navy);
+      color: var(--white);
+      border: none;
+      padding: 15px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s;
+      border-radius: 2px;
+    }
+    .btn-submit:hover { background: var(--brand-red); }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--brand-navy);
+      color: var(--white);
+      padding: 64px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .footer-brand .logo span { color: var(--gold); }
+    .footer-brand p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--white); }
+    .footer-col h4 {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.35); }
+    .gold-divider { width: 36px; height: 1px; background: var(--gold); opacity: 0.4; }
+
+    /* ===================== MOBILE ===================== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { display: none; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .pyramid-layout { grid-template-columns: 1fr; gap: 48px; }
+      .pyramid-visual { display: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .step { border-bottom: 1px solid var(--border); }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-buttons { display: flex; flex-direction: column; gap: 12px; }
+      .btn-outline { margin-left: 0; }
+    }
+    @media (max-width: 580px) {
+      .process-steps { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ===================== SCROLL FADE ===================== */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav id="navbar">
+  <div class="nav-logo">Scent Creation <span>Studio</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#pyramid">Olfactive</a>
+    <a href="#process">Process</a>
+    <a href="#contact" class="nav-cta">Book a Consultation</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+  <!-- Decorative chemical structure -->
+  <svg class="hero-deco" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="240" stroke="#183E72" stroke-width="1"/>
+    <circle cx="300" cy="300" r="180" stroke="#183E72" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="120" stroke="#183E72" stroke-width="0.5"/>
+    <circle cx="300" cy="60" r="20" stroke="#183E72" stroke-width="1"/>
+    <circle cx="508" cy="180" r="20" stroke="#183E72" stroke-width="1"/>
+    <circle cx="508" cy="420" r="20" stroke="#183E72" stroke-width="1"/>
+    <circle cx="300" cy="540" r="20" stroke="#183E72" stroke-width="1"/>
+    <circle cx="92" cy="420" r="20" stroke="#183E72" stroke-width="1"/>
+    <circle cx="92" cy="180" r="20" stroke="#183E72" stroke-width="1"/>
+    <line x1="300" y1="60" x2="508" y2="180" stroke="#183E72" stroke-width="0.5"/>
+    <line x1="508" y1="180" x2="508" y2="420" stroke="#183E72" stroke-width="0.5"/>
+    <line x1="508" y1="420" x2="300" y2="540" stroke="#183E72" stroke-width="0.5"/>
+    <line x1="300" y1="540" x2="92" y2="420" stroke="#183E72" stroke-width="0.5"/>
+    <line x1="92" y1="420" x2="92" y2="180" stroke="#183E72" stroke-width="0.5"/>
+    <line x1="92" y1="180" x2="300" y2="60" stroke="#183E72" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="8" fill="#183E72"/>
+    <circle cx="300" cy="300" r="30" stroke="#B8973A" stroke-width="0.5" stroke-dasharray="4 4"/>
+  </svg>
+
+  <div class="container">
+    <div class="hero-content">
+      <p class="eyebrow">✦ The Art &amp; Science of Perfumery</p>
+      <h1>Where <em>Fragrance</em><br>Becomes<br>Identity.</h1>
+      <p class="hero-tagline">We design and formulate bespoke perfumes that capture emotion, memory, and brand essence — built molecule by molecule with precision and passion.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Begin Your Scent Journey</a>
+        <a href="#expertise" class="btn-outline">Explore Our Studio</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="gold-line"></span>
+        <p class="eyebrow">About the Studio</p>
+        <h2>Fragrance as a<br><em>Precise Craft</em></h2>
+        <p>At Scent Creation Studio, we believe that a remarkable perfume is equal parts chemistry and intuition. Founded by passionate perfumers and aroma chemists, our studio bridges the academic rigor of fragrance formulation with the sensory artistry of haute parfumerie.</p>
+        <p>Every formula we create begins with deep listening — to a brand, a memory, a landscape, or a vision. We translate those intangible qualities into a coherent olfactive language, using carefully sourced essential oils, isolates, and aroma molecules of the highest grade.</p>
+        <p style="color: var(--brand-navy); font-style: italic; font-family: var(--serif); font-size: 16px;">"We do not merely blend ingredients — we compose olfactive narratives."</p>
+      </div>
+      <div class="about-visual reveal">
+        <div class="about-image-box">
+          <svg class="flask-icon" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 10 L40 70 L10 140 Q8 150 20 155 L100 155 Q112 150 110 140 L80 70 L80 10 Z" stroke="#183E72" stroke-width="3" fill="none"/>
+            <line x1="32" y1="30" x2="88" y2="30" stroke="#183E72" stroke-width="2"/>
+            <line x1="28" y1="50" x2="92" y2="50" stroke="#183E72" stroke-width="1"/>
+            <ellipse cx="60" cy="130" rx="35" ry="15" fill="rgba(24,62,114,0.15)"/>
+            <circle cx="45" cy="110" r="4" fill="rgba(184,151,58,0.4)"/>
+            <circle cx="70" cy="120" r="3" fill="rgba(189,43,11,0.3)"/>
+            <circle cx="55" cy="105" r="2" fill="rgba(24,62,114,0.3)"/>
+          </svg>
+        </div>
+        <div class="about-accent-box">
+          <div class="num">500+</div>
+          <div class="label">Aroma Ingredients Mastered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EXPERTISE ========== -->
+<section class="expertise" id="expertise">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Our Expertise</p>
+      <h2>Three Pillars of<br>Olfactive Excellence</h2>
+      <p>From first brief to final formula, our studio offers an integrated suite of fragrance design and development services.</p>
+    </div>
+    <div class="expertise-grid">
+
+      <div class="expertise-card reveal">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4C24 4 12 12 12 26C12 33.7 17.4 39.8 24 42C30.6 39.8 36 33.7 36 26C36 12 24 4 24 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M24 42V28" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M18 34L24 28L30 34" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <h3>Bespoke Perfumery</h3>
+        <p>We create singular fragrances tailored exclusively for individuals, luxury hotels, spas, and lifestyle brands. Your scent becomes an irreplaceable signature — unmistakable and entirely your own.</p>
+        <span class="card-number">01</span>
+      </div>
+
+      <div class="expertise-card reveal">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="6" width="32" height="36" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="23" x2="32" y2="23" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="30" x2="26" y2="30" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="36" cy="36" r="6" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M34 36L35.5 37.5L38.5 34.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Fragrance Formulation</h3>
+        <p>Our perfumers work with precision concentration ratios, olfactory benchmarking, and rigorous stability testing. We develop formulas that are not just beautiful, but durable and reproducible at scale.</p>
+        <span class="card-number">02</span>
+      </div>
+
+      <div class="expertise-card reveal">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 8L28 18H39L30.5 24.5L33.5 35L24 29L14.5 35L17.5 24.5L9 18H20L24 8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <h3>Premium Ingredients</h3>
+        <p>We source only the finest raw materials — from Grasse rose absolute and Mysore sandalwood to cutting-edge synthetic musks and novel aroma molecules that push the boundary of what fragrance can express.</p>
+        <span class="card-number">03</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== OLFACTIVE PYRAMID ========== -->
+<section class="pyramid-section" id="pyramid">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:left;">
+      <p class="eyebrow">Olfactive Science</p>
+      <h2 style="color:white;">The Olfactive Pyramid</h2>
+      <p>The architecture of every fine fragrance — a carefully orchestrated sequence of sensory moments unfolding over time.</p>
+    </div>
+    <div class="pyramid-layout">
+      <div class="notes-list reveal">
+
+        <div class="note-item">
+          <div class="note-dot top"></div>
+          <div class="note-text">
+            <h4>Top Notes</h4>
+            <p>The opening impression lasting 15–30 minutes. Volatile, bright, and immediately striking — these are the notes that make the first encounter unforgettable.</p>
+            <div class="note-examples">
+              <span class="tag">Bergamot</span>
+              <span class="tag">Lemon</span>
+              <span class="tag">Pink Pepper</span>
+              <span class="tag">Aldehydes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-item">
+          <div class="note-dot heart"></div>
+          <div class="note-text">
+            <h4>Heart Notes</h4>
+            <p>The soul of the fragrance, emerging after 30 minutes and persisting for hours. This is the emotional core — where character and intention are most fully expressed.</p>
+            <div class="note-examples">
+              <span class="tag">Rose Absolute</span>
+              <span class="tag">Jasmine</span>
+              <span class="tag">Iris</span>
+              <span class="tag">Geranium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-item">
+          <div class="note-dot base"></div>
+          <div class="note-text">
+            <h4>Base Notes</h4>
+            <p>The lasting foundation, often remaining on skin for 6–8 hours or more. Deep, resonant, and sensual — base notes are the memory that lingers long after the wearer has left the room.</p>
+            <div class="note-examples">
+              <span class="tag">Sandalwood</span>
+              <span class="tag">Vetiver</span>
+              <span class="tag">Ambrette</span>
+              <span class="tag">Musks</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pyramid-visual reveal">
+        <div class="pyramid-svg-wrap">
+          <svg viewBox="0 0 380 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Base -->
+            <polygon points="190,20 370,420 10,420" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Top layer -->
+            <polygon points="190,20 265,175 115,175" fill="rgba(212,175,90,0.25)" stroke="rgba(212,175,90,0.5)" stroke-width="1"/>
+            <text x="190" y="115" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="rgba(212,175,90,0.9)" letter-spacing="2">TOP</text>
+            <!-- Heart layer -->
+            <polygon points="115,175 265,175 315,300 65,300" fill="rgba(189,43,11,0.2)" stroke="rgba(189,43,11,0.45)" stroke-width="1"/>
+            <text x="190" y="248" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="rgba(189,43,11,0.9)" letter-spacing="2">HEART</text>
+            <!-- Base layer -->
+            <polygon points="65,300 315,300 370,420 10,420" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="190" y="370" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="rgba(255,255,255,0.6)" letter-spacing="2">BASE</text>
+
+            <!-- Gold dividers -->
+            <line x1="115" y1="175" x2="265" y2="175" stroke="rgba(184,151,58,0.4)" stroke-width="1"/>
+            <line x1="65" y1="300" x2="315" y2="300" stroke="rgba(184,151,58,0.4)" stroke-width="1"/>
+
+            <!-- Molecule dots -->
+            <circle cx="190" cy="20" r="4" fill="#D4AF5A"/>
+            <circle cx="115" cy="175" r="3" fill="rgba(212,175,90,0.6)"/>
+            <circle cx="265" cy="175" r="3" fill="rgba(212,175,90,0.6)"/>
+            <circle cx="65"  cy="300" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="315" cy="300" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="10"  cy="420" r="3" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="370" cy="420" r="3" fill="rgba(255,255,255,0.2)"/>
+
+            <!-- Duration labels -->
+            <text x="360" y="100" text-anchor="end" font-family="'Jost', sans-serif" font-size="10" fill="rgba(212,175,90,0.5)" letter-spacing="1">15–30 min</text>
+            <text x="360" y="245" text-anchor="end" font-family="'Jost', sans-serif" font-size="10" fill="rgba(189,43,11,0.5)" letter-spacing="1">2–4 hours</text>
+            <text x="360" y="380" text-anchor="end" font-family="'Jost', sans-serif" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="1">6–8+ hours</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">How We Work</p>
+      <h2>Our Studio Process</h2>
+      <p>From the initial conversation to the final vial, a transparent, collaborative journey through the art of fragrance design.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Olfactive Brief</h3>
+        <p>We begin with deep conversation — exploring your brand values, emotional associations, target audience, and preferred olfactory families. No formula is written before we truly understand your vision.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>Concept & Palette</h3>
+        <p>Our perfumers select an initial palette of raw materials and sketch multiple fragrance directions. Concept samples are presented for your sensory evaluation and feedback.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Formulation</h3>
+        <p>The chosen direction is developed into a precise formula. Concentration, longevity, and sillage are refined through iterative sampling until the fragrance performs to the brief's requirements.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h3>Final Delivery</h3>
+        <p>Your complete formula, INCI documentation, and fragrance story are delivered. We remain available for future reformulation, scaling, or seasonal variations of your signature scent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIAL ========== -->
+<section class="testimonial">
+  <div class="container">
+    <span class="gold-line" style="margin: 0 auto 24px;"></span>
+    <blockquote>"A fragrance is a door to a room no one else can enter. Scent Creation Studio helped us build that room — and make it unforgettable."</blockquote>
+    <cite>— <strong>Luxury Spa Director</strong>, Bangkok, Thailand</cite>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="gold-line"></span>
+        <p class="eyebrow">Get in Touch</p>
+        <h2>Begin Your<br><em>Scent Story</em></h2>
+        <p>Whether you are commissioning a single signature perfume or developing an entire fragrance collection, our studio welcomes your inquiry. Every great scent begins with a conversation.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="label">Location</div>
+            <span>Bangkok, Thailand</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="label">Email</div>
+            <a href="mailto:hello@scentcreationstudio.com">hello@scentcreationstudio.com</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="label">Facebook</div>
+            <a href="https://facebook.com/Scentcreationth" target="_blank" rel="noopener">facebook.com/Scentcreationth</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Enquiry Type</label>
+          <select>
+            <option value="">Select a service</option>
+            <option>Bespoke Personal Fragrance</option>
+            <option>Brand / Hotel Signature Scent</option>
+            <option>Fragrance Formulation Consulting</option>
+            <option>Perfumery Education</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea placeholder="Tell us about your fragrance vision, project, or question..."></textarea>
+        </div>
+        <button class="btn-submit">Send Enquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">Scent Creation <span>Studio</span></div>
+        <p>A professional fragrance design and formulation studio blending the art and science of perfumery. Based in Bangkok, serving the world.</p>
+        <a href="https://facebook.com/Scentcreationth" target="_blank" rel="noopener" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          Scentcreationth
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#expertise">Our Expertise</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#pyramid">Olfactive Science</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#contact">Bespoke Perfumery</a></li>
+          <li><a href="#contact">Brand Fragrances</a></li>
+          <li><a href="#contact">Formulation</a></li>
+          <li><a href="#contact">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@scentcreationstudio.com">Email Us</a></li>
+          <li><a href="https://facebook.com/Scentcreationth" target="_blank">Facebook</a></li>
+          <li><a href="#contact">Book Consultation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Scent Creation Studio. All rights reserved.</p>
+      <div class="gold-divider"></div>
+      <p>Crafted with precision & passion.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== JS ========== -->
+<script>
+  // Nav scroll shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hamburger (simple toggle)
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'fixed';
+    links.style.top = '72px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'var(--off-white)';
+    links.style.padding = '24px 40px';
+    links.style.gap = '20px';
+    links.style.borderBottom = '1px solid var(--border)';
+    links.style.zIndex = '99';
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // stagger siblings
+        const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+        let idx = 0;
+        siblings.forEach((el, j) => { if (el === entry.target) idx = j; });
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit (demo)
+  document.querySelector('.btn-submit').addEventListener('click', () => {
+    alert('Thank you for your enquiry. Our studio will be in touch within 2 business days.');
+  });
+</script>
+</body>
+</html>
