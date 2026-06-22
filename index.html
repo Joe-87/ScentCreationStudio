@@ -185,21 +185,33 @@
     .about-h2 { font-family:var(--serif); font-size:clamp(26px,3vw,38px); font-weight:300; color:var(--navy); line-height:1.18; margin-bottom:18px; }
     .about-p { font-size:18px; color:var(--text-mid); line-height:1.9; }
     .about-since {
-      display:flex; align-items:center; gap:0;
+      display:inline-flex; align-items:center; gap:18px;
       margin-top:28px;
-      border:1px solid var(--border);
-      overflow:hidden;
+      background:var(--white);
+      padding:16px 0;
     }
     .since-year {
-      font-family:var(--serif); font-size:36px; font-weight:300;
-      color:var(--white); line-height:1; flex-shrink:0;
-      background:var(--navy);
-      padding:18px 22px;
+      font-family:var(--serif); font-size:40px; font-weight:300;
+      color:var(--navy); line-height:1; flex-shrink:0;
+      animation:fadeSlideIn 1s ease forwards;
+    }
+    .since-sep {
+      width:1px; height:48px; background:var(--navy); flex-shrink:0;
+    }
+    .since-content {}
+    .since-label {
+      font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--text-light); margin-bottom:4px; display:block;
+      animation:fadeSlideIn 1s ease 0.2s both;
     }
     .since-text {
-      font-size:18px; color:var(--text-mid); line-height:1.65;
-      padding:14px 20px;
-      border-left:3px solid var(--gold);
+      font-size:16px; color:var(--text-mid); line-height:1.6;
+      animation:fadeSlideIn 1s ease 0.4s both;
+    }
+    .since-text strong { color:var(--red); }
+    @keyframes fadeSlideIn {
+      from { opacity:0; transform:translateX(-10px); }
+      to   { opacity:1; transform:translateX(0); }
     }
     /* Right side explore button — ripple fill effect */
     .explore-cinq-btn {
@@ -340,6 +352,7 @@
       .hero-sub { font-size:15px; }
       .about-p { font-size:15px; }
       .since-text { font-size:15px; }
+      .about-right { border-left:none; padding-left:0; }
       .sec-hd p { font-size:15px; }
       .exp-card p { font-size:15px; }
       .card-h3 { font-size:24px; }
@@ -451,7 +464,11 @@
         <p class="about-p">20 years' experience in Fragrance, Raw material industrial. Deep understanding of fragrances branding, Olfactive perfume evaluation.</p>
         <div class="about-since">
           <span class="since-year">2024</span>
-          <span class="since-text">We are Representative of<br><strong style="color:var(--navy);">Cinquième Sens</strong> based in Bangkok</span>
+          <span class="since-sep"></span>
+          <div class="since-content">
+            <span class="since-label">Official Representative Since</span>
+            <span class="since-text">We are Representative of <strong>Cinquième Sens</strong><br>based in Bangkok</span>
+          </div>
         </div>
       </div>
 
