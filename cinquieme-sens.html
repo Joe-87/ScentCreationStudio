@@ -36,21 +36,22 @@
     .red-line { display:block; width:44px; height:1px; background:var(--red); margin-bottom:20px; }
 
     /* ── NAV ── */
-    nav { position:fixed; top:0; left:0; right:0; z-index:200; height:72px; background:rgba(253,245,243,0.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); transition:box-shadow .3s; }
-    nav.scrolled { box-shadow:0 2px 24px rgba(189,43,11,.08); }
+    nav { position:fixed; top:0; left:0; right:0; z-index:200; height:72px; background:rgba(248,246,242,0.96); backdrop-filter:blur(16px); border-bottom:1px solid rgba(184,151,58,0.22); transition:box-shadow .3s; }
+    nav.scrolled { box-shadow:0 2px 24px rgba(24,62,114,.08); }
     .nav-inner { height:72px; display:flex; align-items:center; justify-content:space-between; }
     .nav-logo img { height:32px; display:block; }
     .nav-links { display:flex; align-items:center; gap:36px; }
-    .nav-links a { font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--text-mid); transition:color .2s; border-bottom:1.5px solid transparent; padding-bottom:2px; }
-    .nav-links a:hover { color:var(--red); border-bottom-color:var(--red); }
-    .nav-links a.active { color:var(--red); border-bottom-color:var(--red); }
+    .nav-links a { font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:#4A4A4A; transition:color .2s; border-bottom:1.5px solid transparent; padding-bottom:2px; }
+    .nav-links a:hover { color:#183E72; border-bottom-color:#B8973A; }
+    .nav-links a.active { color:#183E72; border-bottom-color:#B8973A; }
     .nav-links a.nav-contact { color:var(--red); }
+    .nav-links a.nav-contact:hover { color:#183E72; }
     .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
-    .hamburger span { display:block; width:22px; height:2px; background:var(--red); border-radius:2px; }
-    .mob-menu { display:none; position:fixed; top:72px; left:0; right:0; background:var(--off-white); border-bottom:1px solid var(--border); padding:24px 32px 32px; z-index:199; flex-direction:column; gap:20px; }
+    .hamburger span { display:block; width:22px; height:2px; background:#183E72; border-radius:2px; }
+    .mob-menu { display:none; position:fixed; top:72px; left:0; right:0; background:#F8F6F2; border-bottom:1px solid rgba(184,151,58,0.22); padding:24px 32px 32px; z-index:199; flex-direction:column; gap:20px; }
     .mob-menu.open { display:flex; }
-    .mob-menu a { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-mid); }
-    .mob-menu a.active { color:var(--red); }
+    .mob-menu a { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#4A4A4A; }
+    .mob-menu a.active { color:#183E72; }
 
     /* ── PAGE HERO ── */
     .page-hero {
@@ -89,17 +90,17 @@
       line-height:1.08; margin-bottom:16px;
     }
     .page-hero-inner h1 em { font-style:italic; opacity:.8; }
-    .page-hero-inner p { font-size:16px; color:rgba(255,255,255,.65); line-height:1.85; max-width:540px; }
+    .page-hero-inner p { font-size:18px; color:rgba(255,255,255,.65); line-height:1.85; max-width:540px; }
 
     /* ── INTRO ── */
     .intro-section { padding:var(--pad) 0; background:var(--white); }
     .intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
     .intro-text .red-line { margin-bottom:16px; }
-    .intro-h2 { font-family:var(--serif); font-size:clamp(28px,3.5vw,44px); font-weight:300; color:var(--red); line-height:1.18; margin-bottom:20px; }
+    .intro-h2 { font-family:var(--serif); font-size:clamp(28px,2.8vw,40px); font-weight:300; color:var(--red); line-height:1.18; margin-bottom:20px; }
     .intro-h2 em { font-style:italic; }
-    .intro-text p { font-size:15px; color:var(--text-mid); line-height:1.9; margin-bottom:14px; }
+    .intro-text p { font-size:18px; color:var(--text-mid); line-height:1.9; margin-bottom:14px; }
     .intro-values { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
-    .value-tag { font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:8px 16px; border:1px solid var(--border); color:var(--red); background:var(--off-white); }
+    .value-tag { font-size:12px; letter-spacing:.14em; text-transform:uppercase; padding:8px 16px; border:1px solid var(--border); color:var(--red); background:var(--off-white); }
 
     /* World map + countries */
     .intro-visual { display:flex; flex-direction:column; align-items:center; gap:24px; }
@@ -110,133 +111,63 @@
       width:100%;
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:0;
-      border-top:1px solid var(--border);
+      gap:4px 0;
     }
     .country-item {
-      padding:10px 12px;
-      border-bottom:1px solid var(--border);
-      border-right:1px solid var(--border);
+      padding:9px 12px;
       display:flex; align-items:center; gap:8px;
     }
-    .country-item:nth-child(3n) { border-right:none; }
-    .country-dot {
-      width:5px; height:5px; border-radius:50%;
-      background:#183E72; flex-shrink:0;
-    }
-    .country-name {
-      font-family:var(--sans);
-      font-size:10px; font-weight:600;
-      letter-spacing:.1em; text-transform:uppercase;
-      color:#183E72;
-    }
+    .country-dot { width:5px; height:5px; border-radius:50%; background:#183E72; flex-shrink:0; }
+    .country-name { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#183E72; }
     .country-item.highlight .country-name { color:var(--red); }
     .country-item.highlight .country-dot { background:var(--red); }
 
     /* ── TIMELINE ── */
-    .timeline-section { padding:var(--pad) 0; background:var(--off-white); }
-    .timeline-section .sec-hd { text-align:center; margin-bottom:clamp(56px,8vw,88px); }
-    .timeline-section .sec-hd h2 { font-family:var(--serif); font-size:clamp(32px,4.5vw,52px); font-weight:300; color:var(--red); }
-
-    /* Timeline container */
-    .timeline {
-      position:relative;
-      max-width:900px;
-      margin:0 auto;
-    }
-    /* Center red line */
-    .timeline::before {
-      content:'';
-      position:absolute;
-      top:0; bottom:0;
-      left:50%; transform:translateX(-50%);
-      width:1px;
-      background:var(--red);
-      opacity:.35;
-    }
-
-    /* Each item */
+    .timeline-section { padding:var(--pad) 0 calc(var(--pad) / 2) 0; background:var(--off-white); }
+    .timeline { position:relative; max-width:900px; margin:0 auto; }
+    .timeline::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:1px; background:var(--red); opacity:.3; }
     .tl-item {
-      display:grid;
-      grid-template-columns:1fr 60px 1fr;
-      gap:0;
-      align-items:start;
+      display:grid; grid-template-columns:1fr 24px 1fr;
       margin-bottom:64px;
-      opacity:0;
-      transform:translateY(32px);
+      opacity:0; transform:translateY(32px);
       transition:opacity .7s ease, transform .7s ease;
     }
+    .tl-item:last-child { margin-bottom:0; }
     .tl-item.vis { opacity:1; transform:translateY(0); }
-
-    /* Year + dot in center column */
-    .tl-center {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding-top:4px;
-      position:relative;
-    }
-    .tl-dot {
-      width:10px; height:10px;
-      border-radius:50%;
-      background:var(--red);
-      border:2px solid var(--off-white);
-      box-shadow:0 0 0 1px var(--red);
-      flex-shrink:0;
-      margin-bottom:6px;
-    }
+    .tl-center { display:flex; flex-direction:column; align-items:center; padding-top:20px; }
+    .tl-dot { width:10px; height:10px; border-radius:50%; background:var(--red); border:2px solid var(--off-white); box-shadow:0 0 0 1px var(--red); flex-shrink:0; }
+    .tl-left { padding-right:40px; text-align:right; }
+    .tl-right { padding-left:40px; text-align:left; }
     .tl-yr {
       font-family:var(--serif);
-      font-size:13px;
-      font-weight:400;
-      color:var(--red);
-      letter-spacing:.06em;
-      white-space:nowrap;
+      font-size:clamp(26px,3vw,48px);
+      font-weight:300; color:#183E72;
+      line-height:1; display:block;
+      margin-bottom:10px; opacity:.8;
     }
-
-    /* Left / right content */
-    .tl-left {
-      padding-right:36px;
-      text-align:right;
-    }
-    .tl-right {
-      padding-left:36px;
-      text-align:left;
-    }
-    .tl-empty { /* spacer when content is only on one side */ }
-
-    .tl-left h3, .tl-right h3 {
-      font-family:var(--serif);
-      font-size:clamp(18px,2vw,22px);
-      font-weight:400;
-      color:var(--red);
-      margin-bottom:8px;
-      line-height:1.3;
-    }
-    .tl-left p, .tl-right p {
-      font-size:13.5px;
-      color:var(--text-mid);
-      line-height:1.85;
-    }
-
-    /* Odd = content left, even = content right */
-    .tl-item:nth-child(odd)  .tl-left  { /* show */ }
-    .tl-item:nth-child(odd)  .tl-right { visibility:hidden; }
-    .tl-item:nth-child(even) .tl-left  { visibility:hidden; }
-    .tl-item:nth-child(even) .tl-right { /* show */ }
-
-    /* Last item — Thailand — always left */
-    .tl-item.tl-highlight .tl-left { visibility:visible; }
+    .tl-left h3, .tl-right h3 { font-family:var(--serif); font-size:clamp(20px,2.2vw,28px); font-weight:400; color:var(--red); margin-bottom:8px; line-height:1.3; }
+    .tl-left p, .tl-right p { font-size:16px; color:var(--text-mid); line-height:1.85; }
+    .tl-item:nth-child(odd) .tl-right { visibility:hidden; }
+    .tl-item:nth-child(even) .tl-left { visibility:hidden; }
     .tl-item.tl-highlight .tl-right { visibility:hidden; }
-    .tl-item.tl-highlight .tl-yr { color:var(--gold); font-size:15px; }
-    .tl-item.tl-highlight .tl-dot { background:var(--gold); box-shadow:0 0 0 1px var(--gold); }
-    .tl-item.tl-highlight h3 { color:var(--red-dark); }
+    .tl-item.tl-highlight .tl-left { visibility:visible; }
+    .tl-item.tl-highlight .tl-yr { color:var(--red); }
+    .tl-item.tl-highlight .tl-left h3 { color:#183E72; }
+    .tl-item.tl-highlight .tl-dot {
+      background:var(--red);
+      box-shadow:0 0 0 1px var(--red);
+      animation:pulse-dot 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow:0 0 0 1px var(--red), 0 0 0 4px rgba(189,43,11,.3); }
+      50%      { box-shadow:0 0 0 1px var(--red), 0 0 0 8px rgba(189,43,11,0); }
+    }
 
     /* ── PARTNERSHIP ── */
     .partner-section { padding:var(--pad) 0; background:var(--red); text-align:center; }
-    .partner-section h2 { font-family:var(--serif); font-size:clamp(28px,4vw,44px); font-weight:300; color:var(--white); margin-bottom:14px; }
+    .partner-section h2 { font-family:var(--serif); font-size:clamp(28px,4vw,52px); font-weight:300; color:var(--white); margin-bottom:14px; }
     .partner-section h2 em { font-style:italic; opacity:.8; }
-    .partner-section p { font-size:15px; color:rgba(255,255,255,.6); max-width:520px; margin:0 auto 32px; line-height:1.85; }
+    .partner-section p { font-size:18px; color:rgba(255,255,255,.6); max-width:520px; margin:0 auto 32px; line-height:1.85; }
     .btn-white { display:inline-block; background:var(--white); color:var(--red); font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:14px 36px; border-radius:2px; transition:background .22s, color .22s; }
     .btn-white:hover { background:var(--off-white); }
     .partner-logos { display:flex; justify-content:center; align-items:center; gap:40px; flex-wrap:wrap; margin-top:40px; padding-top:32px; border-top:1px solid rgba(255,255,255,.15); }
@@ -247,11 +178,11 @@
     footer { background:#8C1F07; color:var(--white); padding:48px 0 28px; }
     .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:48px; padding-bottom:40px; margin-bottom:24px; border-bottom:1px solid rgba(255,255,255,.1); }
     .footer-logo img { height:30px; margin-bottom:16px; filter:brightness(0) invert(1); opacity:.85; }
-    .footer-logo p { font-size:13px; color:rgba(255,255,255,.45); line-height:1.8; }
-    .f-col h5 { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:16px; }
+    .footer-logo p { font-size:clamp(12px,1vw,14px); color:rgba(255,255,255,.45); line-height:1.8; }
+    .f-col h5 { font-size:clamp(9px,0.8vw,10px); letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:16px; }
     .f-col ul { list-style:none; }
     .f-col ul li { margin-bottom:10px; }
-    .f-col ul li a { font-size:13px; color:rgba(255,255,255,.45); transition:color .2s; }
+    .f-col ul li a { font-size:clamp(12px,1vw,14px); color:rgba(255,255,255,.45); transition:color .2s; }
     .f-col ul li a:hover { color:var(--white); }
     .footer-btm { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
     .footer-btm p { font-size:11px; color:rgba(255,255,255,.3); }
@@ -265,8 +196,14 @@
       .nav-links { display:none; }
       .hamburger { display:flex; }
       .intro-grid { grid-template-columns:1fr; gap:40px; }
-      .intro-visual { display:none; }
+      .intro-visual { display:flex; }
       .footer-top { grid-template-columns:1fr; gap:28px; }
+
+      .page-hero-inner p { font-size:15px; }
+      .intro-text p { font-size:15px; }
+      .value-tag { font-size:10px; }
+      .tl-left p, .tl-right p { font-size:15px; }
+      .partner-section p { font-size:15px; }
 
       .timeline::before { left:24px; }
       .tl-item { grid-template-columns:48px 1fr; grid-template-rows:auto; gap:0; }
@@ -294,20 +231,20 @@
     </a>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="index.html#about">About Us</a>
-      <a href="cinquieme-sens.html" class="active">Cinquième Sens</a>
       <a href="https://www.facebook.com/share/p/1CBCArxtBM/" target="_blank">Course</a>
-      <a href="https://www.facebook.com/Scentcreationth" target="_blank" class="nav-contact">Contact Us</a>
+      <a href="cinquieme-sens.html" class="active">Cinquième Sens</a>
+      <a href="index.html#about">About Us</a>
+      <a href="https://m.me/Scentcreationth" target="_blank" class="nav-contact">Contact Us</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
   <a href="index.html">Home</a>
-  <a href="index.html#about">About Us</a>
-  <a href="cinquieme-sens.html" class="active">Cinquième Sens</a>
   <a href="https://www.facebook.com/share/p/1CBCArxtBM/" target="_blank">Course</a>
-  <a href="https://www.facebook.com/Scentcreationth" target="_blank" style="color:var(--red);">Contact Us</a>
+  <a href="cinquieme-sens.html" class="active">Cinquième Sens</a>
+  <a href="index.html#about">About Us</a>
+  <a href="https://m.me/Scentcreationth" target="_blank" style="color:var(--red);">Contact Us</a>
 </div>
 
 <!-- PAGE HERO -->
@@ -315,7 +252,7 @@
   <div class="wrap">
     <div class="page-hero-inner reveal">
       <span class="eyebrow">✦ Our Heritage · Since 1976</span>
-      <h1>Cinquième Sens<br><em>Éveille les émotions</em></h1>
+      <img src="https://github.com/Joe-87/ScentCreationStudio/blob/main/Logo%20CIN%20Horizon%202.png?raw=true" alt="Cinquième Sens" style="height:clamp(78px,10.4vw,125px); width:auto; filter:brightness(0) invert(1); margin-bottom:16px; display:block;"/>
       <p>A composition house and professional training organization, recognized in France, in Grasse, and throughout the world for its talent and expertise in perfumery.</p>
     </div>
   </div>
@@ -328,7 +265,7 @@
       <div class="intro-text reveal">
         <span class="red-line"></span>
         <span class="eyebrow">Who Are We</span>
-        <h2 class="intro-h2">A unique, multi-faceted<br>company with <em>high potential</em></h2>
+        <h2 class="intro-h2">A unique, multi-faceted<br>company with <em>high</em><br><em>potential</em></h2>
         <p>Cinquième Sens is both a fragrance composition house and a world-renowned professional training organization. From their studio near the Eiffel Tower in Paris to their school in Grasse — the perfume capital of the world — they have been shaping the future of perfumery since 1976.</p>
         <p>Their philosophy centers on awakening the senses, sharing expertise, and nurturing creativity across every level of the fragrance industry.</p>
         <div class="intro-values">
@@ -370,114 +307,68 @@
 <!-- TIMELINE -->
 <section class="timeline-section">
   <div class="wrap">
+
+    <!-- Image + heading -->
+    <div class="reveal" style="text-align:center; margin-bottom:clamp(48px,7vw,80px);">
+      <img src="https://github.com/Joe-87/ScentCreationStudio/blob/main/Cinqui%C3%A8me%20Sens%20Paris-01-01.png?raw=true" alt="Cinquième Sens Paris" style="max-width:640px; width:100%; height:auto; margin:0 auto 32px; display:block;"/>
+      <span class="eyebrow" style="color:var(--red);">Our Story</span>
+      <h2 style="font-family:var(--serif); font-size:clamp(30px,4vw,52px); font-weight:300; color:var(--text); line-height:1.18;">Find Our <em style="font-style:italic; color:var(--red);">History</em></h2>
+    </div>
+
     <div class="timeline">
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Cinquième Sens Opens</h3>
-          <p>Monique Schlienger, then a creative perfumer at Robertet, decides to go her own way and establishes Cinquième Sens.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">1976</span></div>
-        <div class="tl-right">
-          <h3>Cinquième Sens Opens</h3>
-          <p>Monique Schlienger, then a creative perfumer at Robertet, decides to go her own way and establishes Cinquième Sens.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">1976</span><h3>Cinquième Sens Opens</h3><p>Monique Schlienger, then a creative perfumer at Robertet, decides to go her own way and establishes Cinquième Sens.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">1976</span><h3>Cinquième Sens Opens</h3><p>Monique Schlienger, then a creative perfumer at Robertet, decides to go her own way and establishes Cinquième Sens.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Monique meets Isabelle Ferrand</h3>
-          <p>Isabelle is passionate about perfume. They share the same taste and work closely together for twenty years, shaping the soul of the company.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">1984</span></div>
-        <div class="tl-right">
-          <h3>Monique meets Isabelle Ferrand</h3>
-          <p>Isabelle is passionate about perfume. They share the same taste and work closely together for twenty years, shaping the soul of the company.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">1984</span><h3>Monique meets Isabelle Ferrand</h3><p>Isabelle is passionate about perfume. They share the same taste and work closely together for twenty years, shaping the soul of the company.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">1984</span><h3>Monique meets Isabelle Ferrand</h3><p>Isabelle is passionate about perfume. They share the same taste and work closely together for twenty years, shaping the soul of the company.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Isabelle Ferrand becomes Director</h3>
-          <p>She repositions the company across four divisions: perfume creation, training, events, and consulting. Original training tools are developed and used by numerous brands worldwide.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2004</span></div>
-        <div class="tl-right">
-          <h3>Isabelle Ferrand becomes Director</h3>
-          <p>She repositions the company across four divisions: perfume creation, training, events, and consulting. Original training tools are developed and used by numerous brands worldwide.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2004</span><h3>Isabelle Ferrand becomes Director</h3><p>She repositions the company across four divisions: perfume creation, training, events, and consulting. Original training tools are developed and used by numerous brands worldwide.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2004</span><h3>Isabelle Ferrand becomes Director</h3><p>She repositions the company across four divisions: perfume creation, training, events, and consulting. Original training tools are developed and used by numerous brands worldwide.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Cinquième Sens Goes International</h3>
-          <p>Following a first partnership in Italy, Cinquième Sens opens a New York office. Partners now include Australia, Brazil, Colombia, Singapore, Dubai, and Hong Kong.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2008</span></div>
-        <div class="tl-right">
-          <h3>Cinquième Sens Goes International</h3>
-          <p>Following a first partnership in Italy, Cinquième Sens opens a New York office. Partners now include Australia, Brazil, Colombia, Singapore, Dubai, and Hong Kong.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2008</span><h3>Cinquième Sens Goes International</h3><p>Following a first partnership in Italy, Cinquième Sens opens a New York office. Partners now include Australia, Brazil, Colombia, Singapore, Dubai, and Hong Kong.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2008</span><h3>Cinquième Sens Goes International</h3><p>Following a first partnership in Italy, Cinquième Sens opens a New York office. Partners now include Australia, Brazil, Colombia, Singapore, Dubai, and Hong Kong.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>A New Look</h3>
-          <p>Major renovations before reopening their offices, a stone's throw from the Eiffel Tower, on rue de Monttessuy — their home for more than 25 years.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2014</span></div>
-        <div class="tl-right">
-          <h3>A New Look</h3>
-          <p>Major renovations before reopening their offices, a stone's throw from the Eiffel Tower, on rue de Monttessuy — their home for more than 25 years.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2014</span><h3>A New Look</h3><p>Major renovations before reopening their offices, a stone's throw from the Eiffel Tower, on rue de Monttessuy — their home for more than 25 years.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2014</span><h3>A New Look</h3><p>Major renovations before reopening their offices, a stone's throw from the Eiffel Tower, on rue de Monttessuy — their home for more than 25 years.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Emanezsens Launches</h3>
-          <p>An association specialized in awakening the sense of smell in children and young adults — offering fun, educational, and artistic activities based on scent.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2015</span></div>
-        <div class="tl-right">
-          <h3>Emanezsens Launches</h3>
-          <p>An association specialized in awakening the sense of smell in children and young adults — offering fun, educational, and artistic activities based on scent.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2015</span><h3>Emanezsens Launches</h3><p>An association specialized in awakening the sense of smell in children and young adults — offering fun, educational, and artistic activities based on scent.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2015</span><h3>Emanezsens Launches</h3><p>An association specialized in awakening the sense of smell in children and young adults — offering fun, educational, and artistic activities based on scent.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Opens in Grasse</h3>
-          <p>A partnership between Isabelle Ferrand and Claire Lonvaud brings Cinquième Sens to Grasse — 40 years after the company was launched.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2016</span></div>
-        <div class="tl-right">
-          <h3>Opens in Grasse</h3>
-          <p>A partnership between Isabelle Ferrand and Claire Lonvaud brings Cinquième Sens to Grasse — 40 years after the company was launched.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2016</span><h3>Opens in Grasse</h3><p>A partnership between Isabelle Ferrand and Claire Lonvaud brings Cinquième Sens to Grasse — 40 years after the company was launched.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2016</span><h3>Opens in Grasse</h3><p>A partnership between Isabelle Ferrand and Claire Lonvaud brings Cinquième Sens to Grasse — 40 years after the company was launched.</p></div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left">
-          <h3>Cinquième Sens Coworking</h3>
-          <p>Opening the first ever shared-access perfume laboratory and rooms dedicated to smelling raw materials and perfumes.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2018</span></div>
-        <div class="tl-right">
-          <h3>Cinquième Sens Coworking</h3>
-          <p>Opening the first ever shared-access perfume laboratory and rooms dedicated to smelling raw materials and perfumes.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2018</span><h3>Cinquième Sens Coworking</h3><p>Opening the first ever shared-access perfume laboratory and rooms dedicated to smelling raw materials and perfumes.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2018</span><h3>Cinquième Sens Coworking</h3><p>Opening the first ever shared-access perfume laboratory and rooms dedicated to smelling raw materials and perfumes.</p></div>
       </div>
 
       <div class="tl-item tl-highlight">
-        <div class="tl-left">
-          <h3>Scent Creation Studio — Thailand</h3>
-          <p>Scent Creation Studio becomes the official representative of Cinquième Sens in Bangkok, bringing French perfumery education and expertise to Thailand.</p>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><span class="tl-yr">2024</span></div>
-        <div class="tl-right">
-          <h3>Scent Creation Studio — Thailand</h3>
-          <p>Scent Creation Studio becomes the official representative of Cinquième Sens in Bangkok, bringing French perfumery education and expertise to Thailand.</p>
-        </div>
+        <div class="tl-left"><span class="tl-yr">2024</span><h3>Scent Creation Studio — Thailand</h3><p>Scent Creation Studio becomes the official representative of Cinquième Sens in Bangkok, bringing French perfumery education and expertise to Thailand.</p></div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"><span class="tl-yr">2024</span><h3>Scent Creation Studio — Thailand</h3><p>Scent Creation Studio becomes the official representative of Cinquième Sens in Bangkok, bringing French perfumery education and expertise to Thailand.</p></div>
       </div>
 
     </div>
@@ -488,13 +379,10 @@
 <section class="partner-section">
   <div class="wrap reveal">
     <span class="eyebrow" style="color:rgba(255,255,255,.5); text-align:center; margin-bottom:16px;">Official Representative · Thailand</span>
-    <h2>Scent Creation Studio<br><em>x Cinquième Sens</em></h2>
+    <h2><em>Scent Creation Studio</em><br><em style="font-size:clamp(20px,2.5vw,28px); opacity:.5; letter-spacing:.2em;">✕</em><br><em>Cinquième Sens</em></h2>
     <p>We are proud to be the official representative of Cinquième Sens in Bangkok — bringing the same world-class curriculum and fragrance philosophy to Thailand since 2024.</p>
     <a href="https://www.facebook.com/Scentcreationth" target="_blank" class="btn-white">Contact Scent Creation Studio</a>
-    <div class="partner-logos">
-      <img src="https://raw.githubusercontent.com/Joe-87/ScentCreationStudio/main/Logo%20SC%20Horizon.png" alt="Scent Creation Studio"/>
-      <img src="https://raw.githubusercontent.com/Joe-87/ScentCreationStudio/main/Logo%20CIN%20Horizon.png" alt="Cinquième Sens"/>
-    </div>
+
   </div>
 </section>
 
