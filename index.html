@@ -121,7 +121,7 @@
     .hero-h1 .line-intro { color:var(--navy); font-style:normal; }
     .hero-h1 .line-perfume { color:var(--navy); font-style:normal; }
     .hero-h1 .line-course { color:var(--red); font-style:italic; }
-    .hero-sub { font-size:clamp(13px,1.3vw,15px); color:var(--text-mid); font-weight:300; line-height:1.85; max-width:440px; margin-bottom:40px; }
+    .hero-sub { font-size:18px; color:var(--text-mid); font-weight:300; line-height:1.85; max-width:440px; margin-bottom:40px; }
     .hero-btns { display:flex; flex-wrap:wrap; gap:14px; }
     .hero-partner {
       display:flex; align-items:center; gap:18px;
@@ -183,7 +183,7 @@
       width:100%; margin-top:8px; margin-bottom:20px;
     }
     .about-h2 { font-family:var(--serif); font-size:clamp(26px,3vw,38px); font-weight:300; color:var(--navy); line-height:1.18; margin-bottom:18px; }
-    .about-p { font-size:15px; color:var(--text-mid); line-height:1.9; }
+    .about-p { font-size:18px; color:var(--text-mid); line-height:1.9; }
     .about-since {
       display:flex; align-items:center; gap:0;
       margin-top:28px;
@@ -197,7 +197,7 @@
       padding:18px 22px;
     }
     .since-text {
-      font-size:13px; color:var(--text-mid); line-height:1.65;
+      font-size:18px; color:var(--text-mid); line-height:1.65;
       padding:14px 20px;
       border-left:3px solid var(--gold);
     }
@@ -263,7 +263,7 @@
     .sec-hd .eyebrow { margin-bottom:12px; }
     .sec-h2 { font-family:var(--serif); font-size:clamp(30px,4vw,50px); font-weight:300; color:var(--navy); line-height:1.18; margin-bottom:14px; }
     .sec-h2 em { font-style:italic; }
-    .sec-hd p { font-size:15px; color:var(--text-light); max-width:480px; margin:0 auto; }
+    .sec-hd p { font-size:18px; color:var(--text-light); max-width:480px; margin:0 auto; }
     .exp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
     .exp-card {
       background:var(--white); padding:48px 38px 56px;
@@ -274,8 +274,8 @@
     .exp-card:hover { transform:translateY(-4px); }
     .exp-card:hover::before { height:100%; }
     .card-icon { width:46px; height:46px; color:var(--navy); margin-bottom:26px; }
-    .card-h3 { font-family:var(--serif); font-size:26px; font-weight:400; color:var(--navy); margin-bottom:12px; line-height:1.25; }
-    .exp-card p { font-size:14px; color:var(--text-mid); line-height:1.85; }
+    .card-h3 { font-family:var(--serif); font-size:28px; font-weight:400; color:var(--navy); margin-bottom:12px; line-height:1.25; }
+    .exp-card p { font-size:18px; color:var(--text-mid); line-height:1.85; }
     .card-num { position:absolute; bottom:20px; right:28px; font-family:var(--serif); font-size:56px; font-weight:300; color:rgba(24,62,114,.05); line-height:1; }
 
 
@@ -323,11 +323,11 @@
     @media (max-width:900px) {
       .nav-links { display:none; }
       .hamburger { display:flex; }
-      .hero-inner { grid-template-columns:1fr; }
+      .hero-inner { grid-template-columns:1fr; padding-top:140px; }
       .hero::before { display:none; }
-      .hero-visual { display:none; }
+      .hero-visual { display:flex; border-left:none; border-top:1.5px solid var(--red); }
       .about-grid { grid-template-columns:1fr; gap:40px; }
-      .about-vis { display:none; }
+      .about-vis { display:block; }
       .exp-grid { grid-template-columns:1fr; }
       .contact-grid { grid-template-columns:1fr; gap:40px; }
       .footer-top { grid-template-columns:1fr 1fr; }
@@ -336,6 +336,13 @@
       .stats-grid { grid-template-columns:1fr; }
       .stat { border-right:none; border-bottom:1px solid rgba(255,255,255,.1); padding:20px 0; }
       .stat:last-child { border-bottom:none; }
+
+      .hero-sub { font-size:15px; }
+      .about-p { font-size:15px; }
+      .since-text { font-size:15px; }
+      .sec-hd p { font-size:15px; }
+      .exp-card p { font-size:15px; }
+      .card-h3 { font-size:24px; }
     }
 
   </style>
@@ -350,20 +357,20 @@
     </a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
-      <a href="#about" onclick="smoothTo('about')">About Us</a>
-      <a href="cinquieme-sens.html">Cinquième Sens</a>
       <a href="https://www.facebook.com/share/p/1CBCArxtBM/" target="_blank">Course</a>
-      <a href="https://www.facebook.com/Scentcreationth" target="_blank" class="nav-contact">Contact Us</a>
+      <a href="cinquieme-sens.html">Cinquième Sens</a>
+      <a href="#about" onclick="smoothTo('about')">About Us</a>
+      <a href="https://m.me/Scentcreationth" target="_blank" class="nav-contact">Contact Us</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
   <a href="index.html" class="active">Home</a>
-  <a href="#about" onclick="smoothTo('about')">About Us</a>
-  <a href="cinquieme-sens.html">Cinquième Sens</a>
   <a href="https://www.facebook.com/share/p/1CBCArxtBM/" target="_blank">Course</a>
-  <a href="https://www.facebook.com/Scentcreationth" target="_blank" style="color:var(--red);">Contact Us</a>
+  <a href="cinquieme-sens.html">Cinquième Sens</a>
+  <a href="#about" onclick="smoothTo('about')">About Us</a>
+  <a href="https://m.me/Scentcreationth" target="_blank" style="color:var(--red);">Contact Us</a>
 </div>
 
 <!-- ══════════ HERO ══════════ -->
