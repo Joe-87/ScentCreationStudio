@@ -25,7 +25,6 @@
       --border:     rgba(184,151,58,0.22);
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans:  'Jost', system-ui, sans-serif;
-      --pad: clamp(72px, 10vw, 120px);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -96,76 +95,137 @@
       font-weight:300;
     }
 
-    /* ===================== FILTER BAR ===================== */
-    .filter-bar {
-      padding: 36px 0 0;
-      background: var(--off-white);
+    /* ===================== ALBUM NAV TABS ===================== */
+    .album-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+    }
+    .album-tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .album-tabs::-webkit-scrollbar { display: none; }
+    .album-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 20px 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .22s;
+      white-space: nowrap;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .album-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform .22s;
+    }
+    .album-tab.active::after,
+    .album-tab:hover::after { transform: scaleX(1); }
+    .tab-uni {
+      font-family: 'Opun', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      transition: color .22s;
+    }
+    .album-tab.active .tab-uni,
+    .album-tab:hover .tab-uni { color: var(--navy); }
+    .tab-label {
+      font-family: var(--serif);
+      font-size: clamp(14px, 1.6vw, 17px);
+      font-weight: 400;
+      color: var(--text-mid);
+      transition: color .22s;
+    }
+    .album-tab.active .tab-label,
+    .album-tab:hover .tab-label { color: var(--navy); }
+    .tab-count {
+      font-family: var(--sans);
+      font-size: 9px;
+      color: var(--text-light);
+      letter-spacing: .06em;
+    }
+    .tab-divider {
+      width: 1px;
+      background: var(--border);
+      margin: 16px 0;
+      flex-shrink: 0;
+    }
 
-    }
-    .filter-inner {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding-bottom:0;
-    }
-    .filter-label {
-      font-size:9px;
-      font-weight:600;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--text-light);
-      margin-right:8px;
-      white-space:nowrap;
-    }
-    @keyframes blink {
-      0%,100% { opacity:1; }
-      50%      { opacity:0; }
-    }
-    .filter-btn {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 20px;
-      border-radius:999px;
-      border:1.5px solid rgba(0,0,0,.14);
-      font-family:var(--sans);
-      font-size:10px;
-      font-weight:600;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition:all .22s;
-      background:transparent;
-      color:var(--text-mid);
-    }
-    .filter-btn .dot { width:6px; height:6px; border-radius:50%; background:#ccc; flex-shrink:0; transition:background .22s; }
-    .filter-btn[data-filter="all"]      .dot { background:var(--gold); }
-    .filter-btn[data-filter="intro"]    .dot { background:var(--navy); }
-    .filter-btn[data-filter="advanced"] .dot { background:var(--red); }
-    .filter-btn[data-filter="guest"]    .dot { background:#ef9e97; }
-    .filter-btn.active .dot { animation:blink 1s ease-in-out 3; }
-    .filter-btn .count {
-      font-size:9px;
-      font-weight:400;
-      opacity:.6;
-    }
-    .filter-btn:hover { border-color:var(--navy); color:var(--navy); }
-
-    .filter-btn.active[data-filter="all"]      { background:transparent; color:var(--text-mid); border-color:rgba(0,0,0,.14); }
-    .filter-btn.active[data-filter="all"]      .dot { background:var(--gold); }
-    .filter-btn.active[data-filter="intro"]    { background:transparent; color:var(--navy);  border-color:var(--navy); }
-    .filter-btn.active[data-filter="intro"]    .dot { background:var(--navy); }
-    .filter-btn.active[data-filter="advanced"] { background:transparent; color:var(--red);   border-color:var(--red); }
-    .filter-btn.active[data-filter="advanced"] .dot { background:var(--red); }
-    .filter-btn.active[data-filter="guest"]    { background:transparent; color:#c0524a;  border-color:#ef9e97; }
-    .filter-btn.active[data-filter="guest"]    .dot { background:#ef9e97; }
-
-    /* ===================== GALLERY SECTION ===================== */
-    .gallery-section {
-      padding: clamp(48px,7vw,88px) 0 clamp(64px,9vw,112px);
+    /* ===================== ALBUM SECTIONS ===================== */
+    .albums-wrapper {
+      padding: clamp(48px,7vw,80px) 0 clamp(64px,9vw,112px);
     }
 
-    /* Masonry via CSS columns */
+    .album-panel {
+      display: none;
+    }
+    .album-panel.active {
+      display: block;
+    }
+
+    /* Album header */
+    .album-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .album-header-left {}
+    .album-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .album-subtitle {
+      font-family: 'Opun', sans-serif;
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 300;
+    }
+    .album-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .album-badge svg { opacity: .7; }
+
+    /* Masonry */
     .masonry {
       columns: 3;
       column-gap: 16px;
@@ -173,102 +233,75 @@
     .masonry-item {
       break-inside: avoid;
       margin-bottom: 16px;
-      position:relative;
-      overflow:hidden;
-      border-radius:2px;
-      cursor:pointer;
-      display:block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      cursor: pointer;
     }
     .masonry-item img {
-      width:100%;
-      height:auto;
-      display:block;
-      transition:transform .55s ease;
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .55s ease;
     }
-    .masonry-item:hover img { transform:scale(1.04); }
+    .masonry-item:hover img { transform: scale(1.04); }
 
     /* overlay on hover */
     .masonry-item .overlay {
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to top, rgba(24,62,114,.65) 0%, transparent 55%);
-      opacity:0;
-      transition:opacity .35s;
-      display:flex;
-      align-items:flex-end;
-      padding:20px;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(24,62,114,.65) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .35s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
     }
-    .masonry-item:hover .overlay { opacity:1; }
+    .masonry-item:hover .overlay { opacity: 1; }
     .overlay-tag {
-      font-size:9px;
-      font-weight:600;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-      color:var(--white);
-      padding:4px 10px;
-      border:1px solid rgba(255,255,255,.55);
-      border-radius:2px;
-    }
-    .overlay-tag.intro  { border-color:var(--gold); color:var(--gold); }
-    .overlay-tag.advanced { border-color:rgba(255,255,255,.6); }
-    .overlay-tag.guest { border-color:var(--gold-light); color:var(--gold-light); }
-
-    /* hidden state for filter */
-    .masonry-item.hidden {
-      display:none;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      padding: 4px 10px;
+      border: 1px solid var(--gold-light);
+      border-radius: 2px;
     }
 
-    /* Empty state */
-    .gallery-empty {
-      display:none;
-      text-align:center;
-      padding:80px 0;
-    }
-    .gallery-empty.show { display:block; }
-    .gallery-empty p {
-      font-family:var(--serif);
-      font-size:22px;
-      font-weight:300;
-      color:var(--text-light);
-    }
-
-    /* ── Placeholder tiles ── */
+    /* Placeholder tiles */
     .ph {
-      background:var(--cream);
-      border:1px dashed rgba(184,151,58,.35);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      color:var(--gold);
-      font-size:10px;
-      font-weight:600;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      background: var(--cream);
+      border: 1px dashed rgba(184,151,58,.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
-    .ph svg { opacity:.4; }
-
-    /* various placeholder heights to simulate masonry variety */
+    .ph svg { opacity: .4; }
     .ph.h1 { height:260px; }
     .ph.h2 { height:340px; }
     .ph.h3 { height:200px; }
     .ph.h4 { height:420px; }
     .ph.h5 { height:300px; }
 
-    /* ── Photo count summary ── */
-    .gallery-meta {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:28px;
+    /* Album "coming soon" empty */
+    .album-empty {
+      text-align: center;
+      padding: 80px 0;
     }
-    .gallery-count {
-      font-size:11px;
-      color:var(--text-light);
-      letter-spacing:.06em;
+    .album-empty p {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-light);
     }
-    .gallery-count span { color:var(--text-mid); font-weight:600; }
 
     /* ===================== FOOTER ===================== */
     footer { background:var(--navy); color:var(--white); padding:64px 0 32px; }
@@ -296,13 +329,20 @@
       .masonry { columns:2; }
       .footer-top { grid-template-columns:1fr 1fr; }
       .footer-btm { flex-direction:column; text-align:center; }
+      .album-tab { padding: 16px 20px; }
     }
     @media (max-width:560px) {
       .masonry { columns:1; }
-      .filter-inner { flex-wrap:wrap; }
       .footer-top { grid-template-columns:1fr; }
+      .album-tab { padding: 14px 16px; }
     }
-  </style>
+        @font-face {
+      font-family: 'Opun';
+      src: url('https://raw.githubusercontent.com/Joe-87/ScentCreationStudio/main/fonts/Opun-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+</style>
 </head>
 <body>
 
@@ -334,7 +374,6 @@
 
 <!-- ══════════ PAGE HERO ══════════ -->
 <section class="page-hero">
-  <!-- Decorative molecule -->
   <svg class="page-hero-deco" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="300" cy="300" r="250" stroke="#fff" stroke-width="1"/>
     <circle cx="300" cy="300" r="180" stroke="#fff" stroke-width="0.6"/>
@@ -353,163 +392,218 @@
   </div>
 </section>
 
-<!-- ══════════ FILTER BAR ══════════ -->
-<div class="filter-bar">
+<!-- ══════════ ALBUM TABS ══════════ -->
+<div class="album-nav">
   <div class="wrap">
-    <div class="filter-inner">
-      <button class="filter-btn active" data-filter="all" onclick="filterGallery('all')">
-        <span class="dot"></span>All <span class="count" id="cnt-all"></span>
+    <div class="album-tabs">
+
+      <button class="album-tab active" data-album="chulalong" onclick="switchAlbum('chulalong', this)">
+        <span class="tab-uni">จุฬาลงกรณ์มหาวิทยาลัย</span>
+        <span class="tab-label">Chulalongkorn University</span>
+        <span class="tab-count" id="cnt-chulalong">0 photos</span>
       </button>
-      <button class="filter-btn" data-filter="intro" onclick="filterGallery('intro')">
-        <span class="dot"></span>Introduction Course <span class="count" id="cnt-intro"></span>
+
+      <div class="tab-divider"></div>
+
+      <button class="album-tab" data-album="maefah" onclick="switchAlbum('maefah', this)">
+        <span class="tab-uni">มหาวิทยาลัยแม่ฟ้าหลวง</span>
+        <span class="tab-label">Mae Fah Luang University</span>
+        <span class="tab-count" id="cnt-maefah">0 photos</span>
       </button>
-      <button class="filter-btn" data-filter="advanced" onclick="filterGallery('advanced')">
-        <span class="dot"></span>Advanced Course <span class="count" id="cnt-advanced"></span>
+
+      <div class="tab-divider"></div>
+
+      <button class="album-tab" data-album="rajamangala" onclick="switchAlbum('rajamangala', this)">
+        <span class="tab-uni">ม.เทคโนโลยีราชมงคลรัตนโกสินทร์</span>
+        <span class="tab-label">Rajamangala University of Technology Rattanakosin</span>
+        <span class="tab-count" id="cnt-rajamangala">0 photos</span>
       </button>
-      <button class="filter-btn" data-filter="guest" onclick="filterGallery('guest')">
-        <span class="dot"></span>Guest Lecturer <span class="count" id="cnt-guest"></span>
-      </button>
+
     </div>
   </div>
 </div>
 
-<!-- ══════════ GALLERY ══════════ -->
-<section class="gallery-section">
+<!-- ══════════ ALBUMS ══════════ -->
+<section class="albums-wrapper">
   <div class="wrap">
 
-    <div class="gallery-meta reveal">
-      <p class="gallery-count">Showing <span id="visible-count">12</span> photos</p>
+    <!-- ── ALBUM: Chulalongkorn ── -->
+    <div class="album-panel active reveal" id="panel-chulalong">
+      <div class="album-header">
+        <div class="album-header-left">
+          <span class="eyebrow">University Partner</span>
+          <h2 class="album-title">Chulalongkorn University</h2>
+          <p class="album-subtitle">จุฬาลงกรณ์มหาวิทยาลัย — Bangkok</p>
+        </div>
+        <div class="album-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+          Guest Lecturer Program
+        </div>
+      </div>
+
+      <div class="masonry" id="masonry-chulalong">
+        <!-- Replace .ph divs with <img> tags when Cloudinary URLs are ready -->
+        <!-- Example: <img src="https://res.cloudinary.com/YOUR_CLOUD/image/upload/w_800,q_auto/photo.jpg" alt="Chulalongkorn workshop"> -->
+
+        <div class="masonry-item">
+          <div class="ph h2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h4">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h3">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h5">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h1">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h3">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Chulalongkorn University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Chulalongkorn</span></div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="masonry" id="masonry">
-
-      <!-- ── INTRO photos (placeholder) ── -->
-      <!-- Replace src with Cloudinary URL when ready, keep data-cat="intro" -->
-
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h2">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
+    <!-- ── ALBUM: Mae Fah Luang ── -->
+    <div class="album-panel" id="panel-maefah">
+      <div class="album-header">
+        <div class="album-header-left">
+          <span class="eyebrow">University Partner</span>
+          <h2 class="album-title">Mae Fah Luang University</h2>
+          <p class="album-subtitle">มหาวิทยาลัยแม่ฟ้าหลวง — Chiang Rai</p>
         </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
+        <div class="album-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+          Guest Lecturer Program
+        </div>
       </div>
 
-      <div class="masonry-item" data-cat="advanced">
-        <div class="ph h4">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Advanced Course
+      <div class="masonry" id="masonry-maefah">
+
+        <div class="masonry-item">
+          <div class="ph h4">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Mae Fah Luang University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Mae Fah Luang</span></div>
         </div>
-        <div class="overlay"><span class="overlay-tag advanced">Advanced</span></div>
+
+        <div class="masonry-item">
+          <div class="ph h2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Mae Fah Luang University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Mae Fah Luang</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h5">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Mae Fah Luang University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Mae Fah Luang</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h3">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Mae Fah Luang University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Mae Fah Luang</span></div>
+        </div>
+
+        <div class="masonry-item">
+          <div class="ph h1">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Mae Fah Luang University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Mae Fah Luang</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ALBUM: Rajamangala ── -->
+    <div class="album-panel" id="panel-rajamangala">
+      <div class="album-header">
+        <div class="album-header-left">
+          <span class="eyebrow">University Partner</span>
+          <h2 class="album-title">Rajamangala University<br>of Technology Rattanakosin</h2>
+          <p class="album-subtitle">มหาวิทยาลัยเทคโนโลยีราชมงคลรัตนโกสินทร์</p>
+        </div>
+        <div class="album-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+          Guest Lecturer Program
+        </div>
       </div>
 
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h3">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
+      <div class="masonry" id="masonry-rajamangala">
+
+        <div class="masonry-item">
+          <div class="ph h3">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Rajamangala University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Rajamangala</span></div>
         </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
-      </div>
 
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h5">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
+        <div class="masonry-item">
+          <div class="ph h5">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Rajamangala University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Rajamangala</span></div>
         </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
-      </div>
 
-      <div class="masonry-item" data-cat="advanced">
-        <div class="ph h3">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Advanced Course
+        <div class="masonry-item">
+          <div class="ph h2">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Rajamangala University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Rajamangala</span></div>
         </div>
-        <div class="overlay"><span class="overlay-tag advanced">Advanced</span></div>
-      </div>
 
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h1">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
+        <div class="masonry-item">
+          <div class="ph h4">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
+            Rajamangala University
+          </div>
+          <div class="overlay"><span class="overlay-tag">Rajamangala</span></div>
         </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
+
       </div>
-
-      <div class="masonry-item" data-cat="advanced">
-        <div class="ph h2">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Advanced Course
-        </div>
-        <div class="overlay"><span class="overlay-tag advanced">Advanced</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h4">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
-        </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h3">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
-        </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="advanced">
-        <div class="ph h5">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Advanced Course
-        </div>
-        <div class="overlay"><span class="overlay-tag advanced">Advanced</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="intro">
-        <div class="ph h2">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Introduction Course
-        </div>
-        <div class="overlay"><span class="overlay-tag intro">Introduction</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="advanced">
-        <div class="ph h1">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Advanced Course
-        </div>
-        <div class="overlay"><span class="overlay-tag advanced">Advanced</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="guest">
-        <div class="ph h4" style="border-color:rgba(24,62,114,.3); color:var(--navy);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Guest Lecturer
-        </div>
-        <div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="guest">
-        <div class="ph h2" style="border-color:rgba(24,62,114,.3); color:var(--navy);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Guest Lecturer
-        </div>
-        <div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div>
-      </div>
-
-      <div class="masonry-item" data-cat="guest">
-        <div class="ph h3" style="border-color:rgba(24,62,114,.3); color:var(--navy);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>
-          Guest Lecturer
-        </div>
-        <div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div>
-      </div>
-
-    </div><!-- /masonry -->
-
-    <div class="gallery-empty" id="emptyState">
-      <p>No photos in this category yet.</p>
     </div>
 
   </div>
@@ -561,55 +655,47 @@
   function toggleMenu() { document.getElementById('mobMenu').classList.toggle('open'); }
 
   /* ── Count badges ── */
-  const items = document.querySelectorAll('.masonry-item');
-  const total = items.length;
-  const introCount    = [...items].filter(i => i.dataset.cat === 'intro').length;
-  const advancedCount = [...items].filter(i => i.dataset.cat === 'advanced').length;
-  const guestCount    = [...items].filter(i => i.dataset.cat === 'guest').length;
-  document.getElementById('cnt-all').textContent      = '(' + total + ')';
-  document.getElementById('cnt-intro').textContent    = '(' + introCount + ')';
-  document.getElementById('cnt-advanced').textContent = '(' + advancedCount + ')';
-  document.getElementById('cnt-guest').textContent    = '(' + guestCount + ')';
-  document.getElementById('visible-count').textContent = total;
+  function countPhotos(masonryId) {
+    return document.querySelectorAll('#' + masonryId + ' .masonry-item').length;
+  }
+  function updateCount(spanId, n) {
+    document.getElementById(spanId).textContent = n + ' photo' + (n !== 1 ? 's' : '');
+  }
+  updateCount('cnt-chulalong',   countPhotos('masonry-chulalong'));
+  updateCount('cnt-maefah',      countPhotos('masonry-maefah'));
+  updateCount('cnt-rajamangala', countPhotos('masonry-rajamangala'));
 
-  /* ── Filter ── */
-  function filterGallery(cat) {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.filter === cat);
+  /* ── Album switching ── */
+  function switchAlbum(albumId, btn) {
+    /* hide all panels */
+    document.querySelectorAll('.album-panel').forEach(p => p.classList.remove('active'));
+    /* deactivate all tabs */
+    document.querySelectorAll('.album-tab').forEach(b => b.classList.remove('active'));
+    /* show target */
+    document.getElementById('panel-' + albumId).classList.add('active');
+    btn.classList.add('active');
+
+    /* re-trigger reveal for newly visible panel */
+    document.querySelectorAll('#panel-' + albumId + ' .masonry-item').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        el.style.transition = 'opacity .5s ease, transform .5s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, i * 70);
     });
-
-    /* reset blink animation on active dot */
-    const activeBtn = document.querySelector('.filter-btn.active');
-    if (activeBtn) {
-      const dot = activeBtn.querySelector('.dot');
-      dot.style.animation = 'none';
-      dot.offsetHeight;
-      dot.style.animation = '';
-    }
-
-    let visible = 0;
-    items.forEach(item => {
-      const show = cat === 'all' || item.dataset.cat === cat;
-      item.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-
-    document.getElementById('visible-count').textContent = visible;
-    document.getElementById('emptyState').classList.toggle('show', visible === 0);
   }
 
-  /* ── Reveal on scroll ── */
+  /* ── Initial reveal ── */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const siblings = entry.target.parentElement.querySelectorAll('.reveal');
-        let idx = 0;
-        siblings.forEach((el, i) => { if (el === entry.target) idx = i; });
-        setTimeout(() => entry.target.classList.add('vis'), idx * 90);
+        entry.target.classList.add('vis');
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
