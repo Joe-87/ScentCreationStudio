@@ -358,6 +358,81 @@
       .card-h3 { font-size:24px; }
     }
 
+
+    /* ── LECTURER MINI (About section) ── */
+    .lecturer-mini-wrap {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .lecturer-mini-eyebrow {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 24px;
+    }
+    .lecturer-mini-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .lecturer-mini-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px;
+      background: var(--off-white);
+      border-left: 2px solid var(--navy);
+    }
+    .lecturer-mini-card:nth-child(2) {
+      border-left-color: var(--red);
+    }
+    .lecturer-mini-avatar {
+      width: 54px; height: 54px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      border: 2px solid rgba(184,151,58,.3);
+    }
+    .lecturer-mini-avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+    .lecturer-mini-role {
+      font-size: 9px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--red); display: block; margin-bottom: 3px;
+    }
+    .lecturer-mini-name {
+      font-family: var(--serif); font-size: 18px; font-weight: 400;
+      color: var(--navy); line-height: 1.1; display: block;
+    }
+    .lecturer-mini-nick {
+      font-family: var(--serif); font-size: 13px; font-style: italic;
+      color: var(--gold); display: block; margin-top: 1px;
+    }
+    .btn-lecturer {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 28px;
+      background: transparent;
+      color: var(--navy);
+      padding: 12px 28px;
+      border-radius: 2px;
+      font-family: var(--sans);
+      font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      border: 1.5px solid var(--navy);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color .3s .1s ease-out;
+      text-decoration: none;
+    }
+    .btn-lecturer::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 0; height: 0;
+      background: var(--navy);
+      border-radius: 50%;
+      transition: width .5s ease-out, height .5s ease-out;
+      z-index: 0;
+    }
+    .btn-lecturer:hover { color: var(--white); }
+    .btn-lecturer:hover::before { width: 300%; height: 500%; }
+    .btn-lecturer svg { position: relative; z-index: 1; width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-lecturer span { position: relative; z-index: 1; }
+    @media (max-width:860px) {
+      .lecturer-mini-grid { grid-template-columns: 1fr; gap: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -484,6 +559,37 @@
         </a>
       </div>
 
+    </div>
+
+    <!-- LECTURER MINI -->
+    <div class="lecturer-mini-wrap reveal">
+      <span class="lecturer-mini-eyebrow">Meet the Lecturer</span>
+      <div class="lecturer-mini-grid">
+        <div class="lecturer-mini-card">
+          <div class="lecturer-mini-avatar">
+            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/v1782233995/Aom_zzciko.png" alt="Kessaraporn Phothong"/>
+          </div>
+          <div>
+            <span class="lecturer-mini-role">Founder &amp; Lead Lecturer</span>
+            <span class="lecturer-mini-name">Kessaraporn Phothong</span>
+            <span class="lecturer-mini-nick">(Aom)</span>
+          </div>
+        </div>
+        <div class="lecturer-mini-card">
+          <div class="lecturer-mini-avatar">
+            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/v1782233598/Joe_zqbmsv.png" alt="Jiramate Likitthammasarn"/>
+          </div>
+          <div>
+            <span class="lecturer-mini-role">Evaluator &amp; Fragrance Development</span>
+            <span class="lecturer-mini-name">Jiramate Likitthammasarn</span>
+            <span class="lecturer-mini-nick">(Joe)</span>
+          </div>
+        </div>
+      </div>
+      <a href="lecturer.html" class="btn-lecturer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Full Profile &amp; Career History</span>
+      </a>
     </div>
   </div>
 </section>
