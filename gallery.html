@@ -120,14 +120,7 @@
     /* Masonry */
     .masonry { columns:3; column-gap:16px; }
     .masonry-item { break-inside:avoid; margin-bottom:16px; position:relative; overflow:hidden; border-radius:2px; cursor:pointer; display:block; }
-    .masonry-item img { width:100%; height:auto; display:block; transition:transform .55s ease; }
-    .masonry-item:hover img { transform:scale(1.04); }
-    .masonry-item .overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(24,62,114,.65) 0%,transparent 55%); opacity:0; transition:opacity .35s; display:flex; align-items:flex-end; padding:20px; }
-    .masonry-item:hover .overlay { opacity:1; }
-    .overlay-tag { font-size:9px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--white); padding:4px 10px; border:1px solid rgba(255,255,255,.55); border-radius:2px; }
-    .overlay-tag.intro    { border-color:var(--gold); color:var(--gold); }
-    .overlay-tag.advanced { border-color:rgba(255,255,255,.6); }
-    .overlay-tag.guest    { border-color:var(--gold-light); color:var(--gold-light); }
+    .masonry-item img { width:100%; height:auto; display:block; }
     .masonry-item.hidden  { display:none; }
 
     /* Guest panels */
@@ -135,6 +128,14 @@
     .guest-panels.show { display:block; }
     .guest-panel { display:none; }
     .guest-panel.active { display:block; }
+
+    /* Guest hero image */
+    .guest-hero { width:100%; height:70vh; overflow:hidden; border-radius:2px; margin-bottom:28px; position:relative; }
+    .guest-hero img { width:100%; height:100%; object-fit:cover; display:block; }
+    .guest-hero .date-label { bottom:16px; right:16px; font-size:10px; padding:5px 12px; }
+
+    /* Date label */
+    .date-label { position:absolute; bottom:10px; right:10px; background:rgba(24,62,114,.72); backdrop-filter:blur(4px); color:#fff; font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:.10em; padding:4px 9px; border-radius:2px; pointer-events:none; }
 
     /* Guest panel header */
     .guest-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid var(--border); gap:20px; flex-wrap:wrap; }
@@ -294,13 +295,13 @@
     <div class="masonry reveal" id="masonry">
 
       <!-- INTRO (7) -->
-      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div><div class="overlay"><span class="overlay-tag intro">Introduction</span></div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
 
       <!-- ADVANCED — replaced by panels below -->
 
@@ -312,22 +313,22 @@
       <!-- 2024 -->
       <div class="advanced-panel active" id="panel-2024">
         <div class="masonry">
-          <div class="masonry-item" data-cat="advanced"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2024</div></div>
         </div>
       </div>
 
       <!-- 2025 -->
       <div class="advanced-panel" id="panel-2025">
         <div class="masonry">
-          <div class="masonry-item" data-cat="advanced"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
-          <div class="masonry-item" data-cat="advanced"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div><div class="overlay"><span class="overlay-tag advanced">Advanced</span></div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div></div>
+          <div class="masonry-item" data-cat="advanced"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Advanced 2025</div></div>
         </div>
       </div>
 
@@ -349,13 +350,37 @@
             Guest Lecturer Program
           </div>
         </div>
+        <div class="guest-hero">
+          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Chula14.jpg" alt="Chulalongkorn University — Guest Lecture" loading="lazy"/>
+          <span class="date-label">1 & 8 Sep 2025</span>
+        </div>
         <div class="masonry">
-          <div class="masonry-item"><div class="ph h2" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h4" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h3" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h5" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h1" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h3" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Chulalongkorn</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
+          <!-- 20 Mar 2024 : Chula1–4 -->
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula1.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula2.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula3.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula4.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
+          <!-- 21 Oct 2024 : Chula5–11 -->
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula5.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula6.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula7.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula8.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula9.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula10.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula11.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
+          <!-- 1 & 8 Sep 2025 : Chula12–13, 15–24 -->
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula12.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula13.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula15.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula16.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula17.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula18.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula19.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula20.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula21.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula22.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula23.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula24.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
         </div>
       </div>
 
@@ -372,14 +397,40 @@
             Guest Lecturer Program
           </div>
         </div>
+        <div class="guest-hero">
+          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto,g_south/mfl26.jpg" alt="Mae Fah Luang University — Guest Lecture" loading="lazy" style="object-position:bottom;"/>
+          <span class="date-label">14 Mar 2026</span>
+        </div>
         <div class="masonry">
-          <div class="masonry-item"><div class="ph h4" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h2" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h5" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h3" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h1" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h2" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h3" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Mae Fah Luang</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
+          <!-- 22 Mar 2025 : mfl1–14 -->
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl1.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl2.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl3.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl4.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl5.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl6.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl7.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl8.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl9.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl10.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl11.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl12.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl13.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl14.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
+          <!-- 14 Mar 2026 : mfl15–25, 27–28 -->
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl15.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl16.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl17.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl18.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl19.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl20.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl21.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl22.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl23.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl24.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl25.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl27.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl28.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
         </div>
       </div>
 
@@ -397,10 +448,25 @@
           </div>
         </div>
         <div class="masonry">
-          <div class="masonry-item"><div class="ph h3" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Rajamangala</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h5" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Rajamangala</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h2" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Rajamangala</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
-          <div class="masonry-item"><div class="ph h4" style="border-color:rgba(24,62,114,.3);color:var(--navy);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Rajamangala</div><div class="overlay"><span class="overlay-tag guest">Guest Lecturer</span></div></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr6.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr2.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr1.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr3.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr4.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr5.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr13.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr7.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr8.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr10.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr11.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr12.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr9.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr14.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr15.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr16.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr17.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr18.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
+          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr19.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
         </div>
       </div>
 
