@@ -68,16 +68,18 @@
     .filter-bar { padding: 36px 0 28px; background: var(--off-white); }
     .filter-inner { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
     @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+    /* Load More */
+    #intro-load-more-wrap { text-align:center; padding:32px 0 8px; }
+    .load-more-btn { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; padding:10px 32px; border:1.5px solid var(--navy); color:var(--navy); background:transparent; border-radius:999px; cursor:pointer; transition:all .2s; }
+    .load-more-btn:hover { background:var(--navy); color:#fff; }
+
     .filter-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 20px; border-radius:999px; border:1.5px solid rgba(0,0,0,.14); font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; cursor:pointer; transition:all .22s; background:transparent; color:var(--text-mid); }
     .filter-btn .dot { width:6px; height:6px; border-radius:50%; background:#ccc; flex-shrink:0; transition:background .22s; }
-    .filter-btn[data-filter="all"]      .dot { background:var(--gold); }
     .filter-btn[data-filter="intro"]    .dot { background:var(--navy); }
     .filter-btn[data-filter="advanced"] .dot { background:var(--red); }
     .filter-btn[data-filter="guest"]    .dot { background:#ef9e97; }
     .filter-btn.active .dot { animation:blink 1s ease-in-out 3; }
     .filter-btn:hover { border-color:var(--navy); color:var(--navy); }
-    .filter-btn.active[data-filter="all"]      { color:var(--text-mid); border-color:rgba(0,0,0,.14); }
-    .filter-btn.active[data-filter="all"]      .dot { background:var(--gold); }
     .filter-btn.active[data-filter="intro"]    { color:var(--navy); border-color:var(--navy); }
     .filter-btn.active[data-filter="intro"]    .dot { background:var(--navy); }
     .filter-btn.active[data-filter="advanced"] { color:var(--red); border-color:var(--red); }
@@ -243,10 +245,7 @@
 <div class="filter-bar">
   <div class="wrap">
     <div class="filter-inner">
-      <button class="filter-btn active" data-filter="all" onclick="filterGallery('all')">
-        <span class="dot"></span>All
-      </button>
-      <button class="filter-btn" data-filter="intro" onclick="filterGallery('intro')">
+      <button class="filter-btn active" data-filter="intro" onclick="filterGallery('intro')">
         <span class="dot"></span>Introduction Course
       </button>
       <button class="filter-btn" data-filter="advanced" onclick="filterGallery('advanced')">
@@ -308,14 +307,8 @@
     <!-- MAIN MASONRY: All / Intro / Advanced -->
     <div class="masonry reveal" id="masonry">
 
-      <!-- INTRO (7) -->
-      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h1"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h3"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
-      <div class="masonry-item" data-cat="intro"><div class="ph h2"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="8.5" cy="13.5" r="1.5"/></svg>Introduction Course</div></div>
+      <!-- INTRO — rendered by JS below -->
+      <div id="intro-grid"></div>
 
       <!-- ADVANCED — replaced by panels below -->
 
@@ -326,22 +319,7 @@
 
       <!-- 2024 -->
       <div class="advanced-panel active" id="panel-2024">
-        <div class="masonry">
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced1.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced2.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced3.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced4.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced5.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced6.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced7.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced8.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced9.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced10.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced11.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced12.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced13.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-          <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Advanced14.jpg" alt="Advanced Course Nov 2024" loading="lazy"/><span class="date-label">Nov 2024</span></div>
-        </div>
+        <div class="masonry" id="adv2024-grid"></div>
       </div>
 
       <!-- 2025 -->
@@ -361,130 +339,21 @@
           <div class="guest-hero">
             <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/wine1.jpg" alt="Make Scents of Wine 2025" loading="lazy"/>
           </div>
-          <div class="masonry">
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine2.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine3.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine4.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine5.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine6.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine7.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine8.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine9.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine10.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine11.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine12.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine13.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine14.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine15.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine16.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine17.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine18.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine19.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine20.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine21.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine22.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine23.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine24.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/wine25.jpg" alt="Make Scents of Wine 2025" loading="lazy"/></div>
-          </div>
+          <div class="masonry" id="wine-grid"></div>
         </div>
         <!-- French Pastries 2025 -->
         <div class="adv-sub-panel" id="panel-2025-pastry">
           <div class="guest-hero">
             <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Pastries1.jpg" alt="French Pastries 2025" loading="lazy"/>
           </div>
-          <div class="masonry">
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries2.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries3.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries4.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries5.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries6.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries7.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries8.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries9.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries10.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries11.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries12.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries13.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries14.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries15.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries16.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries17.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries18.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries19.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries20.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries21.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries22.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries23.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries24.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries25.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries26.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries27.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries28.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries29.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries30.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries31.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries32.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries33.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries34.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries35.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries36.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries37.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries38.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries39.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries40.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries41.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries42.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Pastries43.jpg" alt="French Pastries 2025" loading="lazy"/></div>
-          </div>
+          <div class="masonry" id="pastry-grid"></div>
         </div>
         <!-- Greeting Thai Fragrance Community 2025 -->
         <div class="adv-sub-panel" id="panel-2025-greeting">
           <div class="guest-hero">
             <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Greeting1.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/>
           </div>
-          <div class="masonry">
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting2.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting3.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting4.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting5.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting6.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting7.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting8.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting9.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting10.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting11.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting12.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting13.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting14.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting15.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting16.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting17.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting18.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting19.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting20.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting21.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting22.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting23.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting24.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting25.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting26.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting27.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting28.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting29.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting30.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting31.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting32.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting33.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting34.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting35.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting36.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting37.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting38.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting39.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting40.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-            <div class="masonry-item" data-cat="advanced"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Greeting41.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/></div>
-          </div>
+          <div class="masonry" id="greeting-grid"></div>
         </div>
       </div>
 
@@ -510,34 +379,7 @@
           <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Chula14.jpg" alt="Chulalongkorn University — Guest Lecture" loading="lazy"/>
           <span class="date-label">1 & 8 Sep 2025</span>
         </div>
-        <div class="masonry">
-          <!-- 20 Mar 2024 : Chula1–4 -->
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula1.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula2.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula3.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula4.jpg" alt="Chulalongkorn University — Guest Lecture 20 Mar 2024" loading="lazy"/><span class="date-label">20 Mar 2024</span></div>
-          <!-- 21 Oct 2024 : Chula5–11 -->
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula5.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula6.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula7.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula8.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula9.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula10.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula11.jpg" alt="Chulalongkorn University — Guest Lecture 21 Oct 2024" loading="lazy"/><span class="date-label">21 Oct 2024</span></div>
-          <!-- 1 & 8 Sep 2025 : Chula12–13, 15–24 -->
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula12.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula13.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula15.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula16.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula17.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula18.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula19.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula20.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula21.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula22.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula23.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/Chula24.jpg" alt="Chulalongkorn University — Guest Lecture Sep 2025" loading="lazy"/><span class="date-label">1 & 8 Sep 2025</span></div>
-        </div>
+        <div class="masonry" id="chula-grid"></div>
       </div>
 
       <!-- Mae Fah Luang -->
@@ -557,37 +399,7 @@
           <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto,g_south/mfl26.jpg" alt="Mae Fah Luang University — Guest Lecture" loading="lazy" style="object-position:bottom;"/>
           <span class="date-label">14 Mar 2026</span>
         </div>
-        <div class="masonry">
-          <!-- 22 Mar 2025 : mfl1–14 -->
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl1.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl2.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl3.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl4.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl5.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl6.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl7.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl8.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl9.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl10.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl11.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl12.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl13.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl14.jpg" alt="Mae Fah Luang University — Guest Lecture 22 Mar 2025" loading="lazy"/><span class="date-label">22 Mar 2025</span></div>
-          <!-- 14 Mar 2026 : mfl15–25, 27–28 -->
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl15.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl16.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl17.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl18.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl19.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl20.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl21.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl22.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl23.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl24.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl25.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl27.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/mfl28.jpg" alt="Mae Fah Luang University — Guest Lecture 14 Mar 2026" loading="lazy"/><span class="date-label">14 Mar 2026</span></div>
-        </div>
+        <div class="masonry" id="mfl-grid"></div>
       </div>
 
       <!-- Rajamangala -->
@@ -603,30 +415,15 @@
             Guest Lecturer Program
           </div>
         </div>
-        <div class="masonry">
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr6.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr2.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr1.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr3.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr4.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr5.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr13.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr7.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr8.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr10.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr11.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr12.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr9.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr14.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr15.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr16.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr17.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr18.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-          <div class="masonry-item"><img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/rmutr19.jpg" alt="Rajamangala University — Guest Lecture 15 & 21 Jan 2026" loading="lazy"/><span class="date-label">15 & 21 Jan 2026</span></div>
-        </div>
+        <div class="masonry" id="raja-grid"></div>
       </div>
 
     </div><!-- /guest-panels -->
+
+    <!-- Load More (intro) -->
+    <div id="intro-load-more-wrap" style="display:none;">
+      <button class="load-more-btn" onclick="loadMoreIntro()">Load More</button>
+    </div>
 
   </div>
 </section>
@@ -728,7 +525,6 @@
         item.classList.toggle('hidden', item.dataset.cat !== 'intro');
       });
     }
-    /* 'all' shows everything — already reset above */
   }
 
   /* Year sub-tab switch */
@@ -791,6 +587,144 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ══════════════════════════════════════════════════
+     PHOTO ARRAYS — newest last → displayed newest first
+     To add new photos: append names to END of each array
+     ══════════════════════════════════════════════════ */
+  const CDN = 'https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/';
+
+  const photos = {
+    intro: [
+      {n:'Intro1'},{n:'Intro2'},{n:'Intro3'},{n:'Intro4'},{n:'Intro5'},
+      {n:'Intro6'},{n:'Intro7'},{n:'Intro8'},{n:'Intro9'},{n:'Intro10'},
+      {n:'Intro11'},{n:'Intro12'},{n:'Intro13'},{n:'Intro14'},{n:'Intro15'},
+      {n:'Intro16'},{n:'Intro17'},{n:'Intro18'},{n:'Intro19'},{n:'Intro20'},
+      {n:'Intro21'},{n:'Intro22'},{n:'Intro23'},{n:'Intro24'},{n:'Intro25'},
+      {n:'Intro26'},{n:'Intro27'},{n:'Intro28'},{n:'Intro29'},{n:'Intro30'},
+      {n:'Intro31'},{n:'Intro32'},{n:'Intro33'},{n:'Intro34'},{n:'Intro35'},
+      {n:'Intro36'},{n:'Intro37'},{n:'Intro38'},{n:'Intro39'},{n:'Intro40'},
+      {n:'Intro41'},{n:'Intro42'},{n:'Intro43'}
+    ],
+    adv2024: [
+      {n:'Advanced1',d:'Nov 2024'},{n:'Advanced2',d:'Nov 2024'},{n:'Advanced3',d:'Nov 2024'},
+      {n:'Advanced4',d:'Nov 2024'},{n:'Advanced5',d:'Nov 2024'},{n:'Advanced6',d:'Nov 2024'},
+      {n:'Advanced7',d:'Nov 2024'},{n:'Advanced8',d:'Nov 2024'},{n:'Advanced9',d:'Nov 2024'},
+      {n:'Advanced10',d:'Nov 2024'},{n:'Advanced11',d:'Nov 2024'},{n:'Advanced12',d:'Nov 2024'},
+      {n:'Advanced13',d:'Nov 2024'},{n:'Advanced14',d:'Nov 2024'}
+    ],
+    wine: [
+      {n:'wine2'},{n:'wine3'},{n:'wine4'},{n:'wine5'},{n:'wine6'},{n:'wine7'},
+      {n:'wine8'},{n:'wine9'},{n:'wine10'},{n:'wine11'},{n:'wine12'},{n:'wine13'},
+      {n:'wine14'},{n:'wine15'},{n:'wine16'},{n:'wine17'},{n:'wine18'},{n:'wine19'},
+      {n:'wine20'},{n:'wine21'},{n:'wine22'},{n:'wine23'},{n:'wine24'},{n:'wine25'}
+    ],
+    pastry: [
+      {n:'Pastries2'},{n:'Pastries3'},{n:'Pastries4'},{n:'Pastries5'},{n:'Pastries6'},
+      {n:'Pastries7'},{n:'Pastries8'},{n:'Pastries9'},{n:'Pastries10'},{n:'Pastries11'},
+      {n:'Pastries12'},{n:'Pastries13'},{n:'Pastries14'},{n:'Pastries15'},{n:'Pastries16'},
+      {n:'Pastries17'},{n:'Pastries18'},{n:'Pastries19'},{n:'Pastries20'},{n:'Pastries21'},
+      {n:'Pastries22'},{n:'Pastries23'},{n:'Pastries24'},{n:'Pastries25'},{n:'Pastries26'},
+      {n:'Pastries27'},{n:'Pastries28'},{n:'Pastries29'},{n:'Pastries30'},{n:'Pastries31'},
+      {n:'Pastries32'},{n:'Pastries33'},{n:'Pastries34'},{n:'Pastries35'},{n:'Pastries36'},
+      {n:'Pastries37'},{n:'Pastries38'},{n:'Pastries39'},{n:'Pastries40'},{n:'Pastries41'},
+      {n:'Pastries42'},{n:'Pastries43'}
+    ],
+    greeting: [
+      {n:'Greeting2'},{n:'Greeting3'},{n:'Greeting4'},{n:'Greeting5'},{n:'Greeting6'},
+      {n:'Greeting7'},{n:'Greeting8'},{n:'Greeting9'},{n:'Greeting10'},{n:'Greeting11'},
+      {n:'Greeting12'},{n:'Greeting13'},{n:'Greeting14'},{n:'Greeting15'},{n:'Greeting16'},
+      {n:'Greeting17'},{n:'Greeting18'},{n:'Greeting19'},{n:'Greeting20'},{n:'Greeting21'},
+      {n:'Greeting22'},{n:'Greeting23'},{n:'Greeting24'},{n:'Greeting25'},{n:'Greeting26'},
+      {n:'Greeting27'},{n:'Greeting28'},{n:'Greeting29'},{n:'Greeting30'},{n:'Greeting31'},
+      {n:'Greeting32'},{n:'Greeting33'},{n:'Greeting34'},{n:'Greeting35'},{n:'Greeting36'},
+      {n:'Greeting37'},{n:'Greeting38'},{n:'Greeting39'},{n:'Greeting40'},{n:'Greeting41'}
+    ],
+    chula: [
+      {n:'Chula1',d:'20 Mar 2024'},{n:'Chula2',d:'20 Mar 2024'},{n:'Chula3',d:'20 Mar 2024'},{n:'Chula4',d:'20 Mar 2024'},
+      {n:'Chula5',d:'21 Oct 2024'},{n:'Chula6',d:'21 Oct 2024'},{n:'Chula7',d:'21 Oct 2024'},{n:'Chula8',d:'21 Oct 2024'},
+      {n:'Chula9',d:'21 Oct 2024'},{n:'Chula10',d:'21 Oct 2024'},{n:'Chula11',d:'21 Oct 2024'},
+      {n:'Chula12',d:'1 & 8 Sep 2025'},{n:'Chula13',d:'1 & 8 Sep 2025'},
+      {n:'Chula15',d:'1 & 8 Sep 2025'},{n:'Chula16',d:'1 & 8 Sep 2025'},{n:'Chula17',d:'1 & 8 Sep 2025'},
+      {n:'Chula18',d:'1 & 8 Sep 2025'},{n:'Chula19',d:'1 & 8 Sep 2025'},{n:'Chula20',d:'1 & 8 Sep 2025'},
+      {n:'Chula21',d:'1 & 8 Sep 2025'},{n:'Chula22',d:'1 & 8 Sep 2025'},{n:'Chula23',d:'1 & 8 Sep 2025'},{n:'Chula24',d:'1 & 8 Sep 2025'}
+    ],
+    mfl: [
+      {n:'mfl1',d:'22 Mar 2025'},{n:'mfl2',d:'22 Mar 2025'},{n:'mfl3',d:'22 Mar 2025'},{n:'mfl4',d:'22 Mar 2025'},
+      {n:'mfl5',d:'22 Mar 2025'},{n:'mfl6',d:'22 Mar 2025'},{n:'mfl7',d:'22 Mar 2025'},{n:'mfl8',d:'22 Mar 2025'},
+      {n:'mfl9',d:'22 Mar 2025'},{n:'mfl10',d:'22 Mar 2025'},{n:'mfl11',d:'22 Mar 2025'},{n:'mfl12',d:'22 Mar 2025'},
+      {n:'mfl13',d:'22 Mar 2025'},{n:'mfl14',d:'22 Mar 2025'},
+      {n:'mfl15',d:'14 Mar 2026'},{n:'mfl16',d:'14 Mar 2026'},{n:'mfl17',d:'14 Mar 2026'},{n:'mfl18',d:'14 Mar 2026'},
+      {n:'mfl19',d:'14 Mar 2026'},{n:'mfl20',d:'14 Mar 2026'},{n:'mfl21',d:'14 Mar 2026'},{n:'mfl22',d:'14 Mar 2026'},
+      {n:'mfl23',d:'14 Mar 2026'},{n:'mfl24',d:'14 Mar 2026'},{n:'mfl25',d:'14 Mar 2026'},
+      {n:'mfl27',d:'14 Mar 2026'},{n:'mfl28',d:'14 Mar 2026'}
+    ],
+    raja: [
+      {n:'rmutr6',d:'15 & 21 Jan 2026'},{n:'rmutr2',d:'15 & 21 Jan 2026'},{n:'rmutr1',d:'15 & 21 Jan 2026'},
+      {n:'rmutr3',d:'15 & 21 Jan 2026'},{n:'rmutr4',d:'15 & 21 Jan 2026'},{n:'rmutr5',d:'15 & 21 Jan 2026'},
+      {n:'rmutr13',d:'15 & 21 Jan 2026'},{n:'rmutr8',d:'15 & 21 Jan 2026'},{n:'rmutr10',d:'15 & 21 Jan 2026'},
+      {n:'rmutr11',d:'15 & 21 Jan 2026'},{n:'rmutr12',d:'15 & 21 Jan 2026'},{n:'rmutr9',d:'15 & 21 Jan 2026'},
+      {n:'rmutr14',d:'15 & 21 Jan 2026'},{n:'rmutr15',d:'15 & 21 Jan 2026'},{n:'rmutr16',d:'15 & 21 Jan 2026'},
+      {n:'rmutr17',d:'15 & 21 Jan 2026'},{n:'rmutr18',d:'15 & 21 Jan 2026'},{n:'rmutr19',d:'15 & 21 Jan 2026'}
+    ]
+  };
+
+  /* Render helper — always reversed (newest last = newest first on screen) */
+  function renderGrid(key, gridId, cat, opts={}) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const list = [...photos[key]].reverse();
+    list.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'masonry-item';
+      if (cat) div.dataset.cat = cat;
+      div.innerHTML = `<img src="${CDN}${item.n}.jpg" alt="${item.n}" loading="lazy"/>${item.d ? `<span class="date-label">${item.d}</span>` : ''}`;
+      grid.appendChild(div);
+    });
+  }
+
+  /* Intro: load more (batch 24) */
+  const INTRO_BATCH = 24;
+  let introLoaded = 0;
+  const introList = [...photos.intro].reverse();
+
+  function renderIntroPhotos(start, end) {
+    const grid = document.getElementById('intro-grid');
+    introList.slice(start, end).forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'masonry-item';
+      div.dataset.cat = 'intro';
+      div.style.opacity = '0';
+      div.style.transform = 'translateY(16px)';
+      div.innerHTML = `<img src="${CDN}${item.n}.jpg" alt="Introduction Course" loading="lazy"/>`;
+      grid.appendChild(div);
+      setTimeout(() => {
+        div.style.transition = 'opacity .45s ease, transform .45s ease';
+        div.style.opacity = '1';
+        div.style.transform = 'translateY(0)';
+      }, i * 40);
+    });
+    introLoaded = end;
+    const wrap = document.getElementById('intro-load-more-wrap');
+    wrap.style.display = introLoaded < introList.length ? 'block' : 'none';
+  }
+
+  function loadMoreIntro() {
+    renderIntroPhotos(introLoaded, Math.min(introLoaded + INTRO_BATCH, introList.length));
+  }
+
+  /* Init all grids */
+  renderIntroPhotos(0, Math.min(INTRO_BATCH, introList.length));
+  renderGrid('adv2024',  'adv2024-grid',  'advanced');
+  renderGrid('wine',     'wine-grid',     'advanced');
+  renderGrid('pastry',   'pastry-grid',   'advanced');
+  renderGrid('greeting', 'greeting-grid', 'advanced');
+  renderGrid('chula',    'chula-grid',    null);
+  renderGrid('mfl',      'mfl-grid',      null);
+  renderGrid('raja',     'raja-grid',     null);
+
+  /* Default view: Introduction Course */
+  filterGallery('intro');
 </script>
 </body>
 </html>
