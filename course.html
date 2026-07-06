@@ -18,7 +18,32 @@
     "@type": "Course",
     "name": "Introduction to Perfume Creation",
     "description": "เรียนรู้ตั้งแต่พื้นฐานวัตถุดิบ จนสามารถสร้างกลิ่นหอมระดับเคาน์เตอร์แบรนด์ได้ด้วยตัวคุณเอง",
-    "provider": { "@type": "Organization", "name": "Scent Creation Studio", "url": "https://scentcreationstudio.com" }
+    "provider": { "@type": "Organization", "name": "Scent Creation Studio", "url": "https://scentcreationstudio.com" },
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "Onsite",
+      "courseSchedule": {
+        "@type": "Schedule",
+        "repeatFrequency": "P1M",
+        "repeatCount": 12
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Scent Creation Studio",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bangkok",
+          "addressCountry": "TH"
+        }
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "9900",
+      "priceCurrency": "THB",
+      "availability": "https://schema.org/InStock",
+      "url": "https://scentcreationstudio.com/course.html"
+    }
   }
   </script>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Joe-87/ScentCreationStudio/main/images/logo/Logo%20SC%20Vertical.png"/>
