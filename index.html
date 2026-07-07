@@ -39,6 +39,7 @@
       --red:        #BD2B0B;
       --gold:       #B8973A;
       --gold-light: #D4AF5A;
+      --gold-text:  #A06C08; /* darker gold for text on light backgrounds (WCAG AA ~4.5:1) */
       --white:      #FFFFFF;
       --off-white:  #F8F6F2;
       --cream:      #F1EDE5;
@@ -58,7 +59,7 @@
     .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px,5vw,60px); }
 
     /* ── UTILITIES ── */
-    .eyebrow { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:10px; }
+    .eyebrow { font-family:var(--sans); font-size:10px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-text); display:block; margin-bottom:10px; }
     .gold-line { display:block; width:44px; height:1px; background:var(--gold); margin-bottom:20px; }
     .gold-line.center { margin-left:auto; margin-right:auto; }
 
@@ -319,7 +320,7 @@
     .testimonial { padding:clamp(64px,9vw,104px) 0; background:var(--cream); text-align:center; }
     .testimonial blockquote { font-family:var(--serif); font-size:clamp(20px,2.8vw,34px); font-weight:300; font-style:italic; color:var(--navy); max-width:780px; margin:0 auto 22px; line-height:1.5; min-height:1.5em; }
     .testimonial cite { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--text-light); font-style:normal; }
-    .testimonial cite strong { color:var(--gold); }
+    .testimonial cite strong { color:var(--gold-text); }
     .fade-word { display:inline-block; opacity:0; transform:translateX(-12px); transition:opacity .5s ease, transform .5s ease; margin-right:0.25em; }
     .fade-word.show { opacity:1; transform:translateX(0); }
 
@@ -342,7 +343,7 @@
     .footer-logo p { font-size:13px; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:22px; }
     .fb-link { display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-light); transition:color .2s; }
     .fb-link:hover { color:var(--white); }
-    .f-col h5 { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+    .f-col h5 { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:18px; }
     .f-col ul { list-style:none; }
     .f-col ul li { margin-bottom:10px; }
     .f-col ul li a { font-size:13px; color:rgba(255,255,255,.45); transition:color .2s; }
@@ -391,7 +392,7 @@
     .lecturer-mini-eyebrow {
       font-family: var(--sans); font-size: 10px; font-weight: 600;
       letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); display: block; margin-bottom: 24px;
+      color: var(--gold-text); display: block; margin-bottom: 24px;
     }
     .lecturer-mini-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
@@ -421,7 +422,7 @@
     }
     .lecturer-mini-nick {
       font-family: var(--serif); font-size: 13px; font-style: italic;
-      color: var(--gold); display: block; margin-top: 1px;
+      color: var(--gold-text); display: block; margin-top: 1px;
     }
     .btn-lecturer {
       display: inline-flex; align-items: center; gap: 10px;
