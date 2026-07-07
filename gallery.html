@@ -334,7 +334,11 @@
     <div class="masonry reveal" id="masonry">
 
       <!-- INTRO — rendered by JS below -->
-      <div id="intro-grid"></div>
+      <div id="intro-grid">
+        <div class="masonry-item" data-cat="intro">
+          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto,f_auto/Intro43.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_400,q_auto,f_auto/Intro43.jpg 400w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto/Intro43.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto,f_auto/Intro43.jpg 800w" sizes="(max-width:560px) 92vw, (max-width:900px) 46vw, 31vw" alt="Introduction Course" fetchpriority="high"/>
+        </div>
+      </div>
 
       <!-- ADVANCED — replaced by panels below -->
 
@@ -735,8 +739,7 @@
       div.dataset.cat = 'intro';
       div.style.opacity = '0';
       div.style.transform = 'translateY(16px)';
-      const isFirst = start === 0 && i === 0;
-      div.innerHTML = cldImg(item.n, 'Introduction Course', { eager: isFirst, priority: isFirst });
+      div.innerHTML = cldImg(item.n, 'Introduction Course');
       grid.appendChild(div);
       setTimeout(() => {
         div.style.transition = 'opacity .45s ease, transform .45s ease';
@@ -753,8 +756,8 @@
     renderIntroPhotos(introLoaded, Math.min(introLoaded + INTRO_BATCH, introList.length));
   }
 
-  /* Init all grids */
-  renderIntroPhotos(0, Math.min(INTRO_BATCH, introList.length));
+  /* Init all grids (index 0 already in HTML as the LCP image) */
+  renderIntroPhotos(1, Math.min(INTRO_BATCH, introList.length));
   renderGrid('adv2024',  'adv2024-grid',  'advanced');
   renderGrid('wine',     'wine-grid',     'advanced');
   renderGrid('pastry',   'pastry-grid',   'advanced');
