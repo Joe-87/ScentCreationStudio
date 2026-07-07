@@ -29,7 +29,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"/></noscript>
   <style>
     @font-face {
       font-family: 'Opun';
@@ -154,7 +155,7 @@
     /* Masonry */
     .masonry { columns:3; column-gap:16px; }
     .masonry-item { break-inside:avoid; margin-bottom:16px; position:relative; overflow:hidden; border-radius:2px; cursor:pointer; display:block; }
-    .masonry-item img { width:100%; height:auto; display:block; }
+    .masonry-item img { width:100%; height:auto; aspect-ratio:4/3; background:var(--cream); display:block; }
     .masonry-item.hidden  { display:none; }
 
     /* Guest panels */
@@ -362,21 +363,21 @@
         <!-- Make Scents of Wine 2025 -->
         <div class="adv-sub-panel active" id="panel-2025-wine">
           <div class="guest-hero">
-            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/wine1.jpg" alt="Make Scents of Wine 2025" loading="lazy"/>
+            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/wine1.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto/wine1.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/wine1.jpg 1300w" sizes="(max-width: 700px) 92vw, 1160px" alt="Make Scents of Wine 2025" loading="lazy"/>
           </div>
           <div class="masonry" id="wine-grid"></div>
         </div>
         <!-- French Pastries 2025 -->
         <div class="adv-sub-panel" id="panel-2025-pastry">
           <div class="guest-hero">
-            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Pastries1.jpg" alt="French Pastries 2025" loading="lazy"/>
+            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Pastries1.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto/Pastries1.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Pastries1.jpg 1300w" sizes="(max-width: 700px) 92vw, 1160px" alt="French Pastries 2025" loading="lazy"/>
           </div>
           <div class="masonry" id="pastry-grid"></div>
         </div>
         <!-- Greeting Thai Fragrance Community 2025 -->
         <div class="adv-sub-panel" id="panel-2025-greeting">
           <div class="guest-hero">
-            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Greeting1.jpg" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/>
+            <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Greeting1.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto/Greeting1.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Greeting1.jpg 1300w" sizes="(max-width: 700px) 92vw, 1160px" alt="Greeting Thai Fragrance Community 2025" loading="lazy"/>
           </div>
           <div class="masonry" id="greeting-grid"></div>
         </div>
@@ -401,7 +402,7 @@
           </div>
         </div>
         <div class="guest-hero">
-          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto/Chula14.jpg" alt="Chulalongkorn University — Guest Lecture" loading="lazy"/>
+          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Chula14.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto/Chula14.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto/Chula14.jpg 1300w" sizes="(max-width: 700px) 92vw, 1160px" alt="Chulalongkorn University — Guest Lecture" loading="lazy"/>
           <span class="date-label">1 & 8 Sep 2025</span>
         </div>
         <div class="masonry" id="chula-grid"></div>
@@ -421,7 +422,7 @@
           </div>
         </div>
         <div class="guest-hero">
-          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1600,q_auto,g_south/mfl26.jpg" alt="Mae Fah Luang University — Guest Lecture" loading="lazy" style="object-position:bottom;"/>
+          <img src="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto,g_south/mfl26.jpg" srcset="https://res.cloudinary.com/dcpwxlrl4/image/upload/w_700,q_auto,f_auto,g_south/mfl26.jpg 700w, https://res.cloudinary.com/dcpwxlrl4/image/upload/w_1300,q_auto,f_auto,g_south/mfl26.jpg 1300w" sizes="(max-width: 700px) 92vw, 1160px" alt="Mae Fah Luang University — Guest Lecture" loading="lazy" style="object-position:bottom;"/>
           <span class="date-label">14 Mar 2026</span>
         </div>
         <div class="masonry" id="mfl-grid"></div>
@@ -618,7 +619,7 @@
      PHOTO ARRAYS — newest last → displayed newest first
      To add new photos: append names to END of each array
      ══════════════════════════════════════════════════ */
-  const CDN = 'https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto/';
+  const CDN = 'https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto,f_auto/';
 
   const photos = {
     intro: [
