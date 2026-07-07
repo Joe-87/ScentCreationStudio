@@ -513,8 +513,9 @@
     if (activeBtn) {
       const dot = activeBtn.querySelector('.dot');
       dot.style.animation = 'none';
-      dot.offsetHeight;
-      dot.style.animation = '';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { dot.style.animation = ''; });
+      });
     }
 
     const masonry         = document.getElementById('masonry');
@@ -619,7 +620,18 @@
      PHOTO ARRAYS — newest last → displayed newest first
      To add new photos: append names to END of each array
      ══════════════════════════════════════════════════ */
-  const CDN = 'https://res.cloudinary.com/dcpwxlrl4/image/upload/w_800,q_auto,f_auto/';
+  const CDN_BASE = 'https://res.cloudinary.com/dcpwxlrl4/image/upload/';
+  const MASONRY_SIZES = '(max-width:560px) 92vw, (max-width:900px) 46vw, 31vw';
+  function cldImg(name, alt, opts = {}) {
+    const { eager = false, priority = false } = opts;
+    const src    = `${CDN_BASE}w_800,q_auto,f_auto/${name}.jpg`;
+    const srcset = `${CDN_BASE}w_400,q_auto,f_auto/${name}.jpg 400w, ` +
+                    `${CDN_BASE}w_700,q_auto,f_auto/${name}.jpg 700w, ` +
+                    `${CDN_BASE}w_800,q_auto,f_auto/${name}.jpg 800w`;
+    const loadAttr = eager ? '' : ' loading="lazy"';
+    const fetchAttr = priority ? ' fetchpriority="high"' : '';
+    return `<img src="${src}" srcset="${srcset}" sizes="${MASONRY_SIZES}" alt="${alt}"${loadAttr}${fetchAttr}/>`;
+  }
 
   const photos = {
     intro: [
@@ -705,7 +717,7 @@
       const div = document.createElement('div');
       div.className = 'masonry-item';
       if (cat) div.dataset.cat = cat;
-      div.innerHTML = `<img src="${CDN}${item.n}.jpg" alt="${item.n}" loading="lazy"/>${item.d ? `<span class="date-label">${item.d}</span>` : ''}`;
+      div.innerHTML = `${cldImg(item.n, item.n)}${item.d ? `<span class="date-label">${item.d}</span>` : ''}`;
       grid.appendChild(div);
     });
   }
@@ -723,7 +735,8 @@
       div.dataset.cat = 'intro';
       div.style.opacity = '0';
       div.style.transform = 'translateY(16px)';
-      div.innerHTML = `<img src="${CDN}${item.n}.jpg" alt="Introduction Course" loading="lazy"/>`;
+      const isFirst = start === 0 && i === 0;
+      div.innerHTML = cldImg(item.n, 'Introduction Course', { eager: isFirst, priority: isFirst });
       grid.appendChild(div);
       setTimeout(() => {
         div.style.transition = 'opacity .45s ease, transform .45s ease';
