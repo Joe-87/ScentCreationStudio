@@ -92,7 +92,69 @@
     .nav-links a.nav-contact:hover { color:var(--navy); border-bottom-color:var(--red); }
     .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
     .hamburger span { display:block; width:22px; height:2px; background:var(--navy); border-radius:2px; }
-    .mob-menu { display:none; position:fixed; top:72px; left:0; right:0; background:var(--off-white); border-bottom:1px solid var(--border); padding:24px 32px 32px; z-index:199; flex-direction:column; gap:20px; }
+    .mob-menu { display:none; position:fixed; top:266px; left:0; right:0; background:var(--off-white); border-bottom:1px solid var(--border); padding:24px 32px 32px; z-index:199; flex-direction:column; gap:20px; }
+
+    /* ===================== PROMO BAR (class banner, 3 lines + buttons) ===================== */
+    .promo-bar {
+      position:fixed; top:72px; left:0; right:0; z-index:190;
+      display:flex; align-items:center; justify-content:center;
+      padding:10px 0;
+      background:var(--off-white);
+      border-bottom:1px solid var(--border);
+    }
+    .promo-inner {
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+      gap:6px;
+      max-width:94vw;
+      padding:12px 26px;
+      border:1.3px solid var(--red);
+      border-radius:14px;
+      background:rgba(189,43,11,0.03);
+      position:relative; overflow:hidden;
+    }
+    .promo-line1 { display:flex; align-items:center; gap:10px; }
+    .promo-dot {
+      width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0;
+      position:relative;
+    }
+    .promo-dot::after {
+      content:''; position:absolute; inset:-4px; border-radius:50%;
+      border:1.3px solid var(--red); animation:promoPulse 1.8s ease-out infinite;
+    }
+    .promo-dot.right::after { animation-delay:.5s; }
+    @keyframes promoPulse {
+      0% { transform:scale(0.6); opacity:0.9; }
+      100% { transform:scale(1.8); opacity:0; }
+    }
+    .promo-badge {
+      font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:.06em;
+      text-transform:uppercase; color:var(--white); background:var(--red);
+      padding:4px 10px; border-radius:999px; flex-shrink:0; white-space:nowrap;
+    }
+    .promo-title {
+      font-family:var(--serif); font-size:19px; font-weight:600; color:var(--navy);
+      white-space:nowrap;
+    }
+    .promo-line3 { display:flex; align-items:center; gap:6px; }
+    .promo-date { font-family:var(--sans); color:var(--red); font-weight:600; font-size:14px; white-space:nowrap; }
+    .promo-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:2px; }
+    .promo-btn {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:var(--sans); font-size:10.5px; font-weight:600; letter-spacing:.05em;
+      text-transform:uppercase; padding:7px 16px; border-radius:999px;
+      cursor:pointer; white-space:nowrap;
+      background:transparent; color:var(--navy); border:1.3px solid var(--navy);
+      transition:transform .18s ease, box-shadow .18s ease, background .2s ease, color .2s ease;
+    }
+    .promo-btn:hover { background:var(--navy); color:var(--white); transform:translateY(-1px); box-shadow:0 4px 12px rgba(24,62,114,.18); }
+    .promo-btn svg { width:13px; height:13px; flex-shrink:0; }
+    @media (max-width:640px) {
+      .promo-inner { padding:10px 18px; gap:5px; }
+      .promo-badge { font-size:9px; padding:3px 8px; }
+      .promo-title { font-size:16px; white-space:normal; }
+      .promo-date { font-size:12.5px; }
+      .promo-btn { font-size:9.5px; padding:6px 13px; }
+    }
     .mob-menu.open { display:flex; }
     .mob-menu a { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-mid); }
     .mob-menu a.active { color:var(--navy); }
@@ -100,14 +162,14 @@
     /* ===================== HERO ===================== */
     .hero {
       min-height:100vh;
-      padding-top:72px;
+      padding-top:266px;
       display:flex; align-items:center;
       background:var(--off-white);
       position:relative; overflow:hidden;
     }
     .hero-collab-banner {
       position:absolute;
-      top:72px; left:0; right:0;
+      top:266px; left:0; right:0;
       display:flex; justify-content:center; align-items:center;
       padding:12px 0;
       z-index:3;
@@ -488,6 +550,28 @@
   <a href="gallery.html">Gallery</a>
   <a href="#about" onclick="smoothTo('about')">About Us</a>
   <a href="https://m.me/Scentcreationth" target="_blank" style="color:var(--red);">Contact Us</a>
+</div>
+
+<!-- ══════════ PROMO BAR (คลาสประจำเดือน) ══════════ -->
+<div class="promo-bar">
+  <div class="promo-inner">
+    <span class="promo-line1">
+      <span class="promo-dot"></span>
+      <span class="promo-badge">Open For Reservation</span>
+      <span class="promo-dot right"></span>
+    </span>
+    <span class="promo-title">Introduction to Perfume Creation</span>
+    <span class="promo-line3">
+      <span class="promo-date">21 – 22 August 2026</span>
+    </span>
+    <span class="promo-buttons">
+      <a href="course.html" class="promo-btn promo-btn-course">Course Details</a>
+      <a href="https://m.me/Scentcreationth" target="_blank" class="promo-btn promo-btn-messenger">
+        <svg viewBox="0 0 36 36" fill="currentColor"><path d="M18 0C7.9 0 0 7.4 0 17.5c0 5.6 2.5 10.5 6.4 13.8V36l5.9-3.2c1.6.4 3.3.7 5.1.7 10.1 0 18-7.4 18-17.5S28.1 0 18 0zm1.9 23.6l-4.6-4.9-8.9 4.9L16.4 13l4.7 4.9 8.8-4.9-9.9 10.6z"/></svg>
+        FB Messenger
+      </a>
+    </span>
+  </div>
 </div>
 
 <main>
